@@ -1,0 +1,34 @@
+{
+  "version": "0.1.0",
+  "configurations": [
+    {
+      "name": "Flutter Mobile (Prod)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+      "toolArgs": [
+        "--flavor",
+        "prod",
+        "--release",
+      ]
+    },
+    {
+      "name": "Flutter Mobile (Stag)",
+      "request": "launch",
+      "type": "dart",
+      "toolArgs": [
+        "--flavor",
+        "stag",
+      ]
+    },
+    {
+      "name": "Flutter Mobile (Dev)",
+      "request": "launch",
+      "type": "dart",
+      "toolArgs": [
+        "--flavor",
+        "dev"
+      ]
+    }
+  ]
+}

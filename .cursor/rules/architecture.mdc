@@ -1,0 +1,67 @@
+---
+alwaysApply: true
+---
+
+# Flutter SaaS Starter - Architecture Guide
+
+## 🏗️ Architecture Overview
+
+This project follows **Modular Architecture** principles with **BLoC pattern** for state management, organized into feature modules with shared components.
+
+### Core Principles
+- **Separation of Concerns**: Data, Domain, and UI layers are clearly separated
+- **Dependency Rule**: Inner layers (domain) don't depend on outer layers (UI/data)
+- **Modular Design**: Features are isolated in modules for scalability
+- **Atomic Design**: UI components follow atoms → molecules → organisms → templates → screens
+- **Testability**: Architecture supports easy unit, widget, and integration testing
+
+---
+
+## 📁 Project Structure
+
+```
+lib/
+├── app/                          # Application features
+│   ├── <module>/                 # Feature module (e.g., auth, profile, dashboard)
+│   │   ├── data/                 # Data layer (external concerns)
+│   │   │   ├── repositories/     # Repository implementations
+│   │   │   └── services/         # External services (API clients, local storage)
+│   │   ├── domain/               # Business logic layer (pure Dart)
+│   │   │   ├── dto/              # Data Transfer Objects (API models)
+│   │   │   ├── model/            # Domain models (business entities)
+│   │   │   └── repositories/     # Repository interfaces (contracts)
+│   │   ├── ui/                   # Presentation layer
+│   │   │   ├── blocs/            # BLoC state management
+│   │   │   │   └── <bloc>/
+│   │   │   │       ├── <bloc>.dart        # Main BLoC file
+│   │   │   │       ├── <bloc_event>.dart  # Events
+│   │   │   │       └── <bloc_state>.dart  # States
+│   │   │   ├── components/       # UI components (Atomic Design)
+│   │   │   │   ├── atoms/        # Basic building blocks (buttons, inputs)
+│   │   │   │   ├── molecules/    # Simple component groups (form fields)
+│   │   │   │   ├── organisms/    # Complex components (cards, lists)
+│   │   │   │   └── templates/    # Page layouts (reusable page structures)
+│   │   │   └── screens/          # Full screens/pages
+│   │   ├── injections.dart       # Module-specific dependency injection
+│   │   └── routes.dart           # Module-specific routes
+│   └── shared/                   # Shared resources across modules
+│       ├── data/                 # Shared data layer
+│       ├── domain/               # Shared domain logic
+│       ├── ui/                   # Shared UI components
+│       ├── injections.dart       # Shared DI
+│       └── routes.dart           # Shared routes
+├── config/                       # Environment configurations
+├── constants/                    # App-wide constants
+├── core/                         # Core app infrastructure
+│   ├── app_injections.dart       # Root dependency injection setup
+│   ├── localization/             # i18n files
+│   │   ├── app_en.arb            # English translations
+│   │   └── app_pt.arb            # Portuguese translations
+│   └── navigation/               # App routing
+│       ├── routes.dart           # Route definitions
+│       └── redirects.dart        # Route guards/redirects
+├── theme/                        # App theming (light/dark modes)
+├── utils/                        # Utility functions and helpers
+├── main.dart                     # Main entry point (web + mobile)
+└── main.mobile.dart              # Mobile-specific entry point (optional)
+```
