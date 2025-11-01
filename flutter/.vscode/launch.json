@@ -24,11 +24,7 @@
     {
       "name": "Flutter Mobile (Dev)",
       "request": "launch",
-      "type": "dart",
-      "toolArgs": [
-        "--flavor",
-        "dev"
-      ]
+      "type": "dart"
     }
   ]
 }
