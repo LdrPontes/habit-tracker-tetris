@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:starter/app/auth/domain/dto/sign_in_dto.dart';
 import 'package:starter/app/auth/ui/blocs/sign_in/sign_in_bloc.dart';
 import 'package:starter/core/app_injections.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   static const String routeName = '/sign-in';
 
   const SignInScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final signInBloc = getIt.get<SignInBloc>();
+  State<SignInScreen> createState() => _SignInScreenState();
+}
 
+class _SignInScreenState extends State<SignInScreen> {
+  final signInBloc = getIt.get<SignInBloc>();
+
+  final formKey = GlobalKey<FormState>();
+  final signInDto = SignInDto();
+
+  @override
+  Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => signInBloc,
       child: BlocListener<SignInBloc, SignInState>(
@@ -24,6 +33,7 @@ class SignInScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Form(
+                  key: formKey,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -35,6 +45,9 @@ class SignInScreen extends StatelessWidget {
                             return 'Email is required';
                           }
                           return null;
+                        },
+                        onSaved: (value) {
+                          signInDto.email = value;
                         },
                       ),
                       TextFormField(
@@ -49,12 +62,23 @@ class SignInScreen extends StatelessWidget {
                           }
                           return null;
                         },
+                        onSaved: (value) {
+                          signInDto.password = value;
+                        },
                       ),
                       const SizedBox(height: 16),
                       ElevatedButton(
-                        onPressed: () => signInBloc.add(
-                          SignInWithEmailEvent(email: '', password: ''),
-                        ),
+                        onPressed: () {
+                          if (formKey.currentState?.validate() ?? false) {
+                            formKey.currentState?.save();
+                            signInBloc.add(
+                              SignInWithEmailEvent(
+                                email: signInDto.email ?? '',
+                                password: signInDto.password ?? '',
+                              ),
+                            );
+                          }
+                        },
                         child: const Text('Sign In with Email'),
                       ),
                     ],

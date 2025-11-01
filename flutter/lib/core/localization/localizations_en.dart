@@ -10,4 +10,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appName => 'Starter';
+
+  @override
+  String get authErrorGoogleSignInFailed =>
+      'Google sign in failed. Please try again.';
+
+  @override
+  String get authErrorGoogleIdTokenNotFound =>
+      'Sorry, we couldn\'t sign you in with Google. Please try again.';
+
+  @override
+  String get authErrorAppleSignInFailed =>
+      'Apple sign in failed. Please try again.';
+
+  @override
+  String get authErrorUnknownError =>
+      'An unknown error occurred. Please try again.';
+
+  @override
+  String get authErrorAppleIdTokenNotFound =>
+      'Sorry, we couldn\'t sign you in with Apple. Please try again.';
 }

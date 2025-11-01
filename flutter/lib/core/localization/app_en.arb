@@ -1,3 +1,8 @@
 {
-  "appName": "Starter"
+  "appName": "Starter",
+  "authErrorGoogleSignInFailed": "Google sign in failed. Please try again.",
+  "authErrorGoogleIdTokenNotFound": "Sorry, we couldn't sign you in with Google. Please try again.",
+  "authErrorAppleSignInFailed": "Apple sign in failed. Please try again.",
+  "authErrorUnknownError": "An unknown error occurred. Please try again.",
+  "authErrorAppleIdTokenNotFound": "Sorry, we couldn't sign you in with Apple. Please try again."
 }

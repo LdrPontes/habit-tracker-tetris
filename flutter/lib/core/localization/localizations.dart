@@ -103,6 +103,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Starter'**
   String get appName;
+
+  /// No description provided for @authErrorGoogleSignInFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Google sign in failed. Please try again.'**
+  String get authErrorGoogleSignInFailed;
+
+  /// No description provided for @authErrorGoogleIdTokenNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, we couldn\'t sign you in with Google. Please try again.'**
+  String get authErrorGoogleIdTokenNotFound;
+
+  /// No description provided for @authErrorAppleSignInFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Apple sign in failed. Please try again.'**
+  String get authErrorAppleSignInFailed;
+
+  /// No description provided for @authErrorUnknownError.
+  ///
+  /// In en, this message translates to:
+  /// **'An unknown error occurred. Please try again.'**
+  String get authErrorUnknownError;
+
+  /// No description provided for @authErrorAppleIdTokenNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, we couldn\'t sign you in with Apple. Please try again.'**
+  String get authErrorAppleIdTokenNotFound;
 }
 
 class _AppLocalizationsDelegate

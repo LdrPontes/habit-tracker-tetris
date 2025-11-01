@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+When I ask you to do something, you should use the MCPs to help you.
+
+In this project, we are using the following MCPs:
+- Dart
+- Flutter
+- Supabase
+- Stripe

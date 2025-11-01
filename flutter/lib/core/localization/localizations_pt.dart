@@ -10,4 +10,24 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get appName => 'Starter';
+
+  @override
+  String get authErrorGoogleSignInFailed =>
+      'Falha ao entrar com Google. Tente novamente.';
+
+  @override
+  String get authErrorGoogleIdTokenNotFound =>
+      'Token de ID do Google não encontrado. Tente novamente.';
+
+  @override
+  String get authErrorAppleSignInFailed =>
+      'Falha ao entrar com Apple. Tente novamente.';
+
+  @override
+  String get authErrorUnknownError =>
+      'Ocorreu um erro desconhecido. Tente novamente.';
+
+  @override
+  String get authErrorAppleIdTokenNotFound =>
+      'Sorry, we couldn\'t sign you in with Apple. Please try again.';
 }

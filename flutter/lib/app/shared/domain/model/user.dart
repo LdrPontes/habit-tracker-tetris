@@ -2,21 +2,21 @@ class User {
   final String id;
   final String name;
   final String email;
-  final String password;
+  final String? avatarUrl;
 
   const User({
     required this.id,
     required this.name,
     required this.email,
-    required this.password,
+    this.avatarUrl,
   });
 
-  User copyWith({String? id, String? name, String? email, String? password}) {
+  User copyWith({String? id, String? name, String? email, String? avatarUrl}) {
     return User(
       id: id ?? this.id,
       name: name ?? this.name,
       email: email ?? this.email,
-      password: password ?? this.password,
+      avatarUrl: avatarUrl ?? this.avatarUrl,
     );
   }
 
@@ -25,17 +25,26 @@ class User {
       id: json['id'],
       name: json['name'],
       email: json['email'],
-      password: json['password'],
+      avatarUrl: json['avatar_url'],
+    );
+  }
+
+  factory User.fromSupabaseUser(Map<String, dynamic> user) {
+    return User(
+      id: user['id'],
+      name: user['user_metadata']['full_name'],
+      email: user['email'],
+      avatarUrl: user['user_metadata']['avatar_url'],
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {'id': id, 'name': name, 'email': email, 'password': password};
+    return {'id': id, 'name': name, 'email': email, 'avatar_url': avatarUrl};
   }
 
   @override
   String toString() {
-    return '''User(id: $id, name: $name, email: $email, password: $password)''';
+    return '''User(id: $id, name: $name, email: $email, avatarUrl: $avatarUrl)''';
   }
 
   @override
@@ -46,11 +55,11 @@ class User {
         other.id == id &&
         other.name == name &&
         other.email == email &&
-        other.password == password;
+        other.avatarUrl == avatarUrl;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^ name.hashCode ^ email.hashCode ^ password.hashCode;
+    return id.hashCode ^ name.hashCode ^ email.hashCode ^ avatarUrl.hashCode;
   }
 }
