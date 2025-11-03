@@ -3,5 +3,6 @@
   "authErrorGoogleSignInFailed": "Falha ao entrar com Google. Tente novamente.",
   "authErrorGoogleIdTokenNotFound": "Token de ID do Google não encontrado. Tente novamente.",
   "authErrorAppleSignInFailed": "Falha ao entrar com Apple. Tente novamente.",
-  "authErrorUnknownError": "Ocorreu um erro desconhecido. Tente novamente."
+  "authErrorUnknownError": "Ocorreu um erro desconhecido. Tente novamente.",
+  "authErrorAppleIdTokenNotFound": "Não foi possível entrar com Apple. Tente novamente."
 }

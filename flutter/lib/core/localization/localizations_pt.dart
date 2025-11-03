@@ -29,5 +29,5 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get authErrorAppleIdTokenNotFound =>
-      'Sorry, we couldn\'t sign you in with Apple. Please try again.';
+      'Não foi possível entrar com Apple. Tente novamente.';
 }

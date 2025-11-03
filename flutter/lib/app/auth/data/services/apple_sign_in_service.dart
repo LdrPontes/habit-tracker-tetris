@@ -6,7 +6,10 @@ import 'package:starter/app/auth/domain/errors/auth_exception.dart';
 import 'package:starter/interfaces/logger.dart';
 
 class AppleSignInService {
-  Future<String> signIn(String nonce) async {
+  Future<
+    (String idToken, String? fullName, String? givenName, String? familyName)
+  >
+  signIn(String nonce) async {
     try {
       final hashedNonce = sha256.convert(utf8.encode(nonce)).toString();
       final credential = await SignInWithApple.getAppleIDCredential(
@@ -25,7 +28,11 @@ class AppleSignInService {
         );
       }
 
-      return idToken;
+      String? fullName = '${credential.givenName} ${credential.familyName}';
+      String? givenName = credential.givenName;
+      String? familyName = credential.familyName;
+
+      return (idToken, fullName, givenName, familyName);
     } catch (e) {
       logger.e('[AppleSignInService] UnknownException: ${e.toString()}');
       throw AuthenticationException(

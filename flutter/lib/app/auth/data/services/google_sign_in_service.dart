@@ -5,15 +5,9 @@ import 'package:starter/interfaces/logger.dart';
 class GoogleSignInService {
   Future<(String idToken, String accessToken)> signIn() async {
     try {
-      final googleUser = await GoogleSignIn.instance
-          .attemptLightweightAuthentication();
-
-      if (googleUser == null) {
-        logger.e('[GoogleSignInService] googleUser is null');
-        throw AuthenticationException(
-          code: AuthenticationExceptionCode.googleSignInFailed,
-        );
-      }
+      final googleUser = await GoogleSignIn.instance.authenticate(
+        scopeHint: ['email', 'profile'],
+      );
 
       final authorization =
           await googleUser.authorizationClient.authorizationForScopes([

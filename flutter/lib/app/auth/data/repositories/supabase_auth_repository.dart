@@ -23,13 +23,31 @@ class SupabaseAuthRepository implements AuthRepository {
   Future<Result<User>> signInWithApple() async {
     try {
       String nonce = Supabase.instance.client.auth.generateRawNonce();
-      String idToken = await _appleSignInService.signIn(nonce);
+      final (idToken, fullName, givenName, familyName) =
+          await _appleSignInService.signIn(nonce);
 
       final response = await Supabase.instance.client.auth.signInWithIdToken(
         provider: OAuthProvider.apple,
         idToken: idToken,
         nonce: nonce,
       );
+
+      // If the user has a given name or family name, update the user's metadata because Apple just provides it in the first login.
+      if (givenName != null || familyName != null) {
+        final updatedUser = await Supabase.instance.client.auth.updateUser(
+          UserAttributes(
+            data: {
+              'full_name': fullName,
+              'given_name': givenName,
+              'family_name': familyName,
+            },
+          ),
+        );
+
+        return Result.success(
+          data: User.fromSupabaseUser(updatedUser.user?.toJson() ?? {}),
+        );
+      }
 
       return Result.success(
         data: User.fromSupabaseUser(response.user?.toJson() ?? {}),
