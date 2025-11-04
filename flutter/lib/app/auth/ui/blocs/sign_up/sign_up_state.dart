@@ -1,10 +1,14 @@
 part of 'sign_up_bloc.dart';
 
-sealed class SignUpState extends Equatable {
-  const SignUpState();
-  
-  @override
-  List<Object> get props => [];
-}
+class SignUpState extends Equatable {
+  final Result<User> userResult;
 
-final class SignUpInitial extends SignUpState {}
+  const SignUpState({this.userResult = const Idle<User>()});
+
+  SignUpState copyWith({Result<User>? userResult}) {
+    return SignUpState(userResult: userResult ?? this.userResult);
+  }
+
+  @override
+  List<Object> get props => [userResult];
+}

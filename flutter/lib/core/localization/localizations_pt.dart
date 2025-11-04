@@ -30,4 +30,24 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get authErrorAppleIdTokenNotFound =>
       'Não foi possível entrar com Apple. Tente novamente.';
+
+  @override
+  String get authErrorUserAlreadyExists =>
+      'Um usuário com este email já existe.';
+
+  @override
+  String get authErrorUserNotFound =>
+      'Usuário não encontrado. Verifique suas credenciais.';
+
+  @override
+  String get authErrorUserInvalidCredentials =>
+      'Credenciais inválidas. Verifique seu email e senha.';
+
+  @override
+  String get authErrorEmailNotConfirmed =>
+      'Por favor, confirme seu endereço de email antes de entrar.';
+
+  @override
+  String get authErrorSamePassword =>
+      'A nova senha deve ser diferente da sua senha atual.';
 }

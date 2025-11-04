@@ -2,6 +2,9 @@ import 'package:starter/app/auth/data/repositories/supabase_auth_repository.dart
 import 'package:starter/app/auth/data/services/google_sign_in_service.dart';
 import 'package:starter/app/auth/domain/repositories/auth_repository.dart';
 import 'package:starter/app/auth/ui/blocs/sign_in/sign_in_bloc.dart';
+import 'package:starter/app/auth/ui/blocs/sign_up/sign_up_bloc.dart';
+import 'package:starter/app/auth/ui/blocs/forgot_password/forgot_password_bloc.dart';
+import 'package:starter/app/auth/ui/blocs/reset_password/reset_password_bloc.dart';
 import 'package:starter/core/app_injections.dart';
 import 'package:starter/app/auth/data/services/apple_sign_in_service.dart';
 
@@ -12,8 +15,17 @@ void authModuleInjections() {
 }
 
 void _startBlocsInjections() {
-  getIt.registerLazySingleton<SignInBloc>(
+  getIt.registerFactory<SignInBloc>(
     () => SignInBloc(authRepository: getIt<AuthRepository>()),
+  );
+  getIt.registerFactory<SignUpBloc>(
+    () => SignUpBloc(authRepository: getIt<AuthRepository>()),
+  );
+  getIt.registerFactory<ForgotPasswordBloc>(
+    () => ForgotPasswordBloc(authRepository: getIt<AuthRepository>()),
+  );
+  getIt.registerFactory<ResetPasswordBloc>(
+    () => ResetPasswordBloc(authRepository: getIt<AuthRepository>()),
   );
 }
 

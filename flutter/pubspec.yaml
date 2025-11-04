@@ -32,6 +32,7 @@ dependencies:
   supabase: ^2.10.0
   logger: ^2.6.2
   crypto: ^3.0.6
+  toastification: ^3.0.3
 
 dev_dependencies:
   flutter_test:

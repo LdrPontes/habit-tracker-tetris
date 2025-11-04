@@ -133,6 +133,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sorry, we couldn\'t sign you in with Apple. Please try again.'**
   String get authErrorAppleIdTokenNotFound;
+
+  /// No description provided for @authErrorUserAlreadyExists.
+  ///
+  /// In en, this message translates to:
+  /// **'A user with this email already exists.'**
+  String get authErrorUserAlreadyExists;
+
+  /// No description provided for @authErrorUserNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'User not found. Please check your credentials.'**
+  String get authErrorUserNotFound;
+
+  /// No description provided for @authErrorUserInvalidCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid credentials. Please check your email and password.'**
+  String get authErrorUserInvalidCredentials;
+
+  /// No description provided for @authErrorEmailNotConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Please confirm your email address before signing in.'**
+  String get authErrorEmailNotConfirmed;
+
+  /// No description provided for @authErrorSamePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'New password must be different from your current password.'**
+  String get authErrorSamePassword;
 }
 
 class _AppLocalizationsDelegate

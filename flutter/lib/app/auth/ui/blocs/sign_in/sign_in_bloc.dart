@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:starter/app/auth/domain/dto/sign_in_dto.dart';
 import 'package:starter/app/auth/domain/repositories/auth_repository.dart';
 import 'package:starter/app/shared/domain/dto/result.dart';
 import 'package:starter/app/shared/domain/model/user.dart';
@@ -41,5 +42,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     Emitter<SignInState> emit,
   ) async {
     emit(state.copyWith(userResult: const Result.loading()));
+    final result = await _authRepository.signInWithEmail(
+      SignInDto(email: event.email, password: event.password),
+    );
+    emit(state.copyWith(userResult: result));
   }
 }

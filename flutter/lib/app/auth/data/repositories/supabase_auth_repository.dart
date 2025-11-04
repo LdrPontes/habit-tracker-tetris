@@ -6,6 +6,7 @@ import 'package:starter/app/auth/domain/errors/auth_exception.dart';
 import 'package:starter/app/auth/domain/repositories/auth_repository.dart';
 import 'package:starter/app/shared/domain/dto/result.dart';
 import 'package:starter/app/shared/domain/model/user.dart';
+import 'package:starter/config/env.dart';
 import 'package:starter/interfaces/logger.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide User;
 
@@ -60,9 +61,7 @@ class SupabaseAuthRepository implements AuthRepository {
     } on AuthException catch (e) {
       logger.e('[SupabaseAuthRepository] AuthException: ${e.toString()}');
       return Result.error(
-        exception: AuthenticationException(
-          code: AuthenticationExceptionCode.appleSignInFailed,
-        ),
+        exception: AuthenticationException.fromSupabaseError(e.code),
       );
     } catch (e) {
       logger.e('[SupabaseAuthRepository] UnknownException: ${e.toString()}');
@@ -75,10 +74,29 @@ class SupabaseAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<Result<User>> signInWithEmail(SignInDto signInDto) {
-    throw AuthenticationException(
-      code: AuthenticationExceptionCode.unknownError,
-    );
+  Future<Result<User>> signInWithEmail(SignInDto signInDto) async {
+    try {
+      final response = await Supabase.instance.client.auth.signInWithPassword(
+        email: signInDto.email!,
+        password: signInDto.password!,
+      );
+
+      return Result.success(
+        data: User.fromSupabaseUser(response.user?.toJson() ?? {}),
+      );
+    } on AuthException catch (e) {
+      logger.e('[SupabaseAuthRepository] AuthException: ${e.toString()}');
+      return Result.error(
+        exception: AuthenticationException.fromSupabaseError(e.code),
+      );
+    } catch (e) {
+      logger.e('[SupabaseAuthRepository] UnknownException: ${e.toString()}');
+      return Result.error(
+        exception: AuthenticationException(
+          code: AuthenticationExceptionCode.unknownError,
+        ),
+      );
+    }
   }
 
   @override
@@ -103,11 +121,7 @@ class SupabaseAuthRepository implements AuthRepository {
     } on AuthException catch (e) {
       logger.e('[SupabaseAuthRepository] AuthException: ${e.toString()}');
       return Result.error(
-        exception: AuthenticationException(
-          code: AuthenticationExceptionCode.googleSignInFailed,
-        ),
-        message: e.message,
-        code: e.code,
+        exception: AuthenticationException.fromSupabaseError(e.code),
       );
     } catch (e) {
       logger.e('[SupabaseAuthRepository] UnknownException: ${e.toString()}');
@@ -115,15 +129,106 @@ class SupabaseAuthRepository implements AuthRepository {
         exception: AuthenticationException(
           code: AuthenticationExceptionCode.unknownError,
         ),
-        message: e.toString(),
       );
     }
   }
 
   @override
-  Future<Result<User>> signUp(SignUpDto signUpDto) {
-    throw AuthenticationException(
-      code: AuthenticationExceptionCode.unknownError,
-    );
+  Future<Result<User>> signUp(SignUpDto signUpDto) async {
+    try {
+      final response = await Supabase.instance.client.auth.signUp(
+        email: signUpDto.email!,
+        password: signUpDto.password!,
+        data: {'full_name': signUpDto.fullName!},
+        emailRedirectTo: Env.REDIRECT_URL,
+      );
+
+      return Result.success(
+        data: User.fromSupabaseUser(response.user?.toJson() ?? {}),
+      );
+    } on AuthException catch (e) {
+      logger.e('[SupabaseAuthRepository] AuthException: ${e.toString()}');
+      return Result.error(
+        exception: AuthenticationException.fromSupabaseError(e.code),
+      );
+    } catch (e) {
+      logger.e('[SupabaseAuthRepository] UnknownException: ${e.toString()}');
+      return Result.error(
+        exception: AuthenticationException(
+          code: AuthenticationExceptionCode.unknownError,
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Result<void>> forgotPassword(String email) async {
+    try {
+      await Supabase.instance.client.auth.resetPasswordForEmail(
+        email,
+        redirectTo: '${Env.REDIRECT_URL}reset-password',
+      );
+
+      return const Result.success();
+    } on AuthException catch (e) {
+      return Result.error(
+        exception: AuthenticationException.fromSupabaseError(e.code),
+      );
+    } catch (e) {
+      return Result.error(
+        exception: AuthenticationException(
+          code: AuthenticationExceptionCode.unknownError,
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Result<void>> resetPassword(String newPassword) async {
+    try {
+      await Supabase.instance.client.auth.updateUser(
+        UserAttributes(password: newPassword),
+      );
+
+      await Supabase.instance.client.auth.signOut();
+
+      return const Result.success();
+    } on AuthException catch (e) {
+      return Result.error(
+        exception: AuthenticationException.fromSupabaseError(e.code),
+      );
+    } catch (e) {
+      return Result.error(
+        exception: AuthenticationException(
+          code: AuthenticationExceptionCode.unknownError,
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<User?> getCurrentUser() async {
+    final user = Supabase.instance.client.auth.currentUser;
+    return user != null ? User.fromSupabaseUser(user.toJson()) : null;
+  }
+
+  @override
+  Future<Result> signOut() async {
+    try {
+      await Supabase.instance.client.auth.signOut();
+      return const Result.success();
+    } on AuthException catch (e) {
+      logger.e('[SupabaseAuthRepository] AuthException: ${e.toString()}');
+      return Result.error(
+        exception: AuthenticationException.fromSupabaseError(e.code),
+      );
+    } catch (e) {
+      logger.e('[SupabaseAuthRepository] UnknownException: ${e.toString()}');
+      return Result.error(
+        exception: AuthenticationException(
+          code: AuthenticationExceptionCode.unknownError,
+        ),
+      );
+    }
   }
 }

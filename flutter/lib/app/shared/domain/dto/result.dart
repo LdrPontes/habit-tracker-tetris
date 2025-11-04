@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:starter/app/shared/domain/errors/app_exceptions.dart';
+import 'package:starter/core/localization/localizations.dart';
 
 class Result<T> extends Equatable {
   const Result._();
@@ -33,11 +35,11 @@ class Result<T> extends Equatable {
 
   @override
   List<Object?> get props => [
-        if (this is Success) (this as Success).data,
-        if (this is Error) (this as Error).code,
-        if (this is Error) (this as Error).message,
-        if (this is Error) (this as Error).exception,
-      ];
+    if (this is Success) (this as Success).data,
+    if (this is Error) (this as Error).code,
+    if (this is Error) (this as Error).message,
+    if (this is Error) (this as Error).exception,
+  ];
 }
 
 class Idle<T> extends Result<T> {
@@ -49,9 +51,7 @@ class Success<T> extends Result<T> {
   const Success({this.data}) : super._();
 
   @override
-  List<Object?> get props => [
-        data,
-      ];
+  List<Object?> get props => [data];
 }
 
 class Error<T> extends Result<T> {
@@ -62,11 +62,7 @@ class Error<T> extends Result<T> {
   const Error({this.code, this.message, this.exception}) : super._();
 
   @override
-  List<Object?> get props => [
-        code,
-        message,
-        exception,
-      ];
+  List<Object?> get props => [code, message, exception];
 }
 
 class Loading<T> extends Result<T> {
@@ -78,16 +74,22 @@ class PaginatedResult<T> extends Equatable {
   final int? totalPages;
   final int? totalItems;
 
-  const PaginatedResult({
-    this.page,
-    this.totalPages,
-    this.totalItems,
-  });
+  const PaginatedResult({this.page, this.totalPages, this.totalItems});
 
   @override
-  List<Object?> get props => [
-        page,
-        totalPages,
-        totalItems,
-      ];
+  List<Object?> get props => [page, totalPages, totalItems];
+}
+
+extension ErrorHandler on Error {
+  String getMessage(BuildContext context, {String? defaultErrorMessage}) {
+    if (exception is AppException) {
+      final localizations = AppLocalizations.of(context);
+      if (localizations != null) {
+        return (exception as AppException).getLocalizedMessage(localizations);
+      }
+      // Fallback if localizations are not available
+      return message ?? defaultErrorMessage ?? 'An unknown error occurred';
+    }
+    return message ?? defaultErrorMessage ?? 'An unknown error occurred';
+  }
 }

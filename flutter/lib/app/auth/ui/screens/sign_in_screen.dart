@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:starter/app/auth/domain/dto/sign_in_dto.dart';
 import 'package:starter/app/auth/ui/blocs/sign_in/sign_in_bloc.dart';
+import 'package:starter/app/auth/ui/screens/sign_up_screen.dart';
+import 'package:starter/app/auth/ui/screens/forgot_password_screen.dart';
+import 'package:starter/app/shared/domain/dto/result.dart';
+import 'package:starter/app/shared/ui/components/molecules/snackbar_service.dart';
 import 'package:starter/core/app_injections.dart';
+import 'package:starter/core/navigation/routes.dart';
 
 class SignInScreen extends StatefulWidget {
   static const String routeName = '/sign-in';
@@ -66,6 +71,14 @@ class _SignInScreenState extends State<SignInScreen> {
                           signInDto.password = value;
                         },
                       ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () =>
+                              router.push(ForgotPasswordScreen.routeName),
+                          child: const Text('Forgot Password?'),
+                        ),
+                      ),
                       const SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () {
@@ -93,6 +106,11 @@ class _SignInScreenState extends State<SignInScreen> {
                   onPressed: () => signInBloc.add(SignInWithAppleEvent()),
                   child: const Text('Sign In with Apple'),
                 ),
+                const Divider(height: 48),
+                ElevatedButton(
+                  onPressed: () => router.push(SignUpScreen.routeName),
+                  child: const Text('Sign Up'),
+                ),
               ],
             ),
           ),
@@ -102,9 +120,17 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void _signInListener(BuildContext context, SignInState state) {
-    state.userResult.when(
-      success: (user) {},
-      error: (code, message, exception) {},
-    );
+    if (state.userResult is Success) {
+      SnackbarService.of(context).success('Sign in successful');
+    }
+
+    if (state.userResult is Error) {
+      SnackbarService.of(context).error(
+        (state.userResult as Error).getMessage(
+          context,
+          defaultErrorMessage: 'An unknown error occurred',
+        ),
+      );
+    }
   }
 }

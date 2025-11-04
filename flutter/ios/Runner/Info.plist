@@ -57,8 +57,11 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.242513077179-p86t800jf28ee6r4q4gh79m6khf2u82v</string>
+				<string>blockin</string>
 			</array>
 		</dict>
 	</array>
+	<key>FlutterDeepLinkingEnabled</key>
+	<false/>
 </dict>
 </plist>
