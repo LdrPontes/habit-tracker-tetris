@@ -10,6 +10,5 @@ String? requireAuth(BuildContext context, GoRouterState state) {
   if (!isAuthenticated) {
     return SignInScreen.routeName;
   }
-
   return null;
 }

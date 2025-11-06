@@ -8,6 +8,7 @@ import 'package:starter/app/shared/domain/dto/result.dart';
 import 'package:starter/app/shared/ui/components/molecules/snackbar_service.dart';
 import 'package:starter/core/app_injections.dart';
 import 'package:starter/core/navigation/routes.dart';
+import 'package:starter/app/board/ui/screens/home_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   static const String routeName = '/sign-in';
@@ -122,6 +123,7 @@ class _SignInScreenState extends State<SignInScreen> {
   void _signInListener(BuildContext context, SignInState state) {
     if (state.userResult is Success) {
       SnackbarService.of(context).success('Sign in successful');
+      router.go(TetrisDemoScreen.routeName);
     }
 
     if (state.userResult is Error) {

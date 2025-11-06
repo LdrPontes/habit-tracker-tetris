@@ -33,6 +33,7 @@ dependencies:
   logger: ^2.6.2
   crypto: ^3.0.6
   toastification: ^3.0.3
+  flutter_svg: ^2.2.2
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +52,10 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/skins/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
