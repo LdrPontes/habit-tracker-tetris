@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:starter/app/board/domain/model/board.dart';
 import 'package:starter/app/board/domain/model/piece.dart';
+import 'package:starter/app/board/ui/components/atoms/board_piece.dart';
 import 'package:flutter/widget_previews.dart';
 
 class DroppableBoard extends StatefulWidget {
@@ -57,16 +58,23 @@ class _DroppableBoardState extends State<DroppableBoard> {
             );
           }
 
-          return CustomPaint(
-            size: Size(constraints.maxWidth, finalHeight),
-            painter: DroppableBoardPainter(
-              board: _board,
-              cellSize: cellSize,
-              hoveringPiece: _hoveringPiece,
-              hoverRow: _hoverRow,
-              hoverCol: _hoverCol,
-              canPlacePiece: canPlace,
-            ),
+          return Stack(
+            children: [
+              // Draw grid only
+              CustomPaint(
+                size: Size(constraints.maxWidth, finalHeight),
+                painter: DroppableBoardPainter(
+                  board: _board,
+                  cellSize: cellSize,
+                  hoveringPiece: _hoveringPiece,
+                  hoverRow: _hoverRow,
+                  hoverCol: _hoverCol,
+                  canPlacePiece: canPlace,
+                ),
+              ),
+              // Draw all placed pieces using BoardPiece component
+              ..._buildPlacedPieces(cellSize, totalRows),
+            ],
           );
         },
       ),
@@ -113,7 +121,12 @@ class _DroppableBoardState extends State<DroppableBoard> {
       });
       print('[DroppableBoard] Piece successfully placed on board');
     } else {
-      // Piece could not be placed (should not happen if validation is correct)
+      // Piece could not be placed - clear hover state
+      setState(() {
+        _hoveringPiece = null;
+        _hoverRow = null;
+        _hoverCol = null;
+      });
       print('[DroppableBoard] Failed to place piece - invalid position');
     }
   }
@@ -155,6 +168,39 @@ class _DroppableBoardState extends State<DroppableBoard> {
       _hoverCol = col;
     });
   }
+
+  List<Widget> _buildPlacedPieces(double cellSize, int totalRows) {
+    final pieces = <Widget>[];
+
+    for (final piece in _board.placedPieces) {
+      final pieceWidth = piece.width * cellSize;
+      final pieceHeight = piece.height * cellSize;
+
+      // Calculate position on screen
+      // Convert from board coordinates (bottom-up) to screen coordinates (top-down)
+      // y is the base of the piece (row), so the top is at y + (height - 1)
+      final boardRowTop = piece.y + (piece.height - 1);
+      final rowFromTop = totalRows - 1 - boardRowTop;
+      final x = piece.x * cellSize;
+      final y = rowFromTop * cellSize;
+
+      pieces.add(
+        Positioned(
+          left: x,
+          top: y,
+          width: pieceWidth,
+          height: pieceHeight,
+          child: BoardPiece(
+            piece: piece,
+            cellSize: cellSize,
+            isDragging: false,
+          ),
+        ),
+      );
+    }
+
+    return pieces;
+  }
 }
 
 class DroppableBoardPainter extends CustomPainter {
@@ -183,11 +229,7 @@ class DroppableBoardPainter extends CustomPainter {
 
     final rows = (size.height / cellSize).ceil();
 
-    // Draw grid cells and occupied cells - always 12 columns
-    final occupiedPaint = Paint()
-      ..style = PaintingStyle.fill
-      ..color = Colors.grey.shade700;
-
+    // Draw grid cells - always 12 columns
     for (int row = 0; row < rows; row++) {
       for (int col = 0; col < board.cols; col++) {
         final x = col * cellSize;
@@ -195,25 +237,13 @@ class DroppableBoardPainter extends CustomPainter {
 
         final rect = Rect.fromLTWH(x, y, cellSize, cellSize);
 
-        // Convert row from top-down to bottom-up for grid access
-        // row 0 in grid is bottom, row 0 in drawing is top
-        final gridRow = rows - 1 - row;
-
-        // Draw occupied cell if it exists in the grid
-        if (gridRow >= 0 &&
-            gridRow < board.grid.length &&
-            col >= 0 &&
-            col < board.cols &&
-            board.grid[gridRow][col] == 1) {
-          canvas.drawRect(rect, occupiedPaint);
-        }
-
         // Draw cell border
         canvas.drawRect(rect, borderPaint);
       }
     }
 
-    // Draw hovering piece preview if present
+    // Placed pieces are now drawn using BoardPiece widgets in the Stack
+    // Only draw hovering piece preview here
     if (hoveringPiece != null && hoverRow != null && hoverCol != null) {
       _drawHoveringPiece(canvas, size, hoveringPiece!, hoverRow!, hoverCol!);
     }
@@ -230,10 +260,16 @@ class DroppableBoardPainter extends CustomPainter {
 
     // Get piece color with transparency for preview
     // Use red if cannot place, otherwise use piece color
-    final pieceColor = canPlacePiece
-        ? (piece.skin.color ?? Colors.grey)
-        : Colors.red;
-    final previewColor = pieceColor.withOpacity(0.5);
+    // For SVG pieces, use a default color for preview
+    Color pieceColor;
+    if (piece.skin.isSvg) {
+      pieceColor = canPlacePiece ? Colors.purple.shade400 : Colors.red;
+    } else {
+      pieceColor = canPlacePiece
+          ? (piece.skin.color ?? Colors.grey)
+          : Colors.red;
+    }
+    final previewColor = pieceColor.withAlpha((255 * 0.5).toInt());
 
     final fillPaint = Paint()
       ..style = PaintingStyle.fill

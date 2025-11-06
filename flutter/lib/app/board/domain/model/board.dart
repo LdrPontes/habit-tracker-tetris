@@ -2,11 +2,56 @@ import 'package:starter/app/board/domain/model/piece.dart';
 
 class Board {
   final int cols;
+  final List<Piece> placedPieces;
+  // Keep grid for backward compatibility and support checking
   List<List<int>> grid = List.empty(growable: true); // 0 = empty, 1 = occupied
 
-  Board({this.cols = 12, List<List<int>>? grid = const []}) {
-    this.grid =
-        grid ?? List.generate(4, (index) => List.generate(cols, (index) => 0));
+  Board({this.cols = 12, List<Piece>? placedPieces, List<List<int>>? grid})
+    : placedPieces = placedPieces ?? [],
+      grid =
+          grid ??
+          (placedPieces == null
+              ? List.generate(4, (index) => List.generate(cols, (index) => 0))
+              : _buildGridFromPieces(placedPieces, cols));
+
+  static List<List<int>> _buildGridFromPieces(List<Piece> pieces, int cols) {
+    if (pieces.isEmpty) {
+      return List.generate(4, (index) => List.generate(cols, (index) => 0));
+    }
+
+    // Find the maximum row needed
+    int maxRow = 0;
+    for (final piece in pieces) {
+      final maxPieceRow = piece.y + piece.height - 1;
+      if (maxPieceRow > maxRow) {
+        maxRow = maxPieceRow;
+      }
+    }
+
+    // Build grid from pieces
+    final newGrid = List.generate(
+      maxRow + 1,
+      (index) => List.generate(cols, (index) => 0),
+    );
+
+    for (final piece in pieces) {
+      for (int py = 0; py < piece.height; py++) {
+        for (int px = 0; px < piece.width; px++) {
+          if (piece.shape[py][px] == 1) {
+            final boardCol = piece.x + px;
+            final boardRow = piece.y + (piece.height - 1 - py);
+            if (boardRow >= 0 &&
+                boardRow < newGrid.length &&
+                boardCol >= 0 &&
+                boardCol < cols) {
+              newGrid[boardRow][boardCol] = 1;
+            }
+          }
+        }
+      }
+    }
+
+    return newGrid;
   }
 
   int get rows => grid.length;
@@ -147,13 +192,18 @@ class Board {
       }
     }
 
-    // Return a new Board with the updated grid
-    return Board(cols: cols, grid: newGrid);
+    // Create a copy of placed pieces and add the new one with position set
+    final newPlacedPieces = List<Piece>.from(placedPieces);
+    final placedPiece = piece.copyWith(x: col, y: row);
+    newPlacedPieces.add(placedPiece);
+
+    // Return a new Board with the updated pieces and grid
+    return Board(cols: cols, placedPieces: newPlacedPieces, grid: newGrid);
   }
 
   @override
   String toString() {
-    return 'Board(cols: $cols, rows: $rows, grid: $grid)';
+    return 'Board(cols: $cols, rows: $rows, placedPieces: ${placedPieces.length})';
   }
 
   @override
@@ -162,13 +212,26 @@ class Board {
     return other is Board &&
         other.cols == cols &&
         other.rows == rows &&
+        other.placedPieces.length == placedPieces.length &&
         other.grid == grid;
   }
 
   @override
-  int get hashCode => cols.hashCode ^ rows.hashCode ^ grid.hashCode;
+  int get hashCode =>
+      cols.hashCode ^
+      rows.hashCode ^
+      placedPieces.length.hashCode ^
+      grid.hashCode;
 
-  Board copyWith({int? cols, List<List<int>>? grid}) {
-    return Board(cols: cols ?? this.cols, grid: grid ?? this.grid);
+  Board copyWith({
+    int? cols,
+    List<Piece>? placedPieces,
+    List<List<int>>? grid,
+  }) {
+    return Board(
+      cols: cols ?? this.cols,
+      placedPieces: placedPieces ?? this.placedPieces,
+      grid: grid ?? this.grid,
+    );
   }
 }
