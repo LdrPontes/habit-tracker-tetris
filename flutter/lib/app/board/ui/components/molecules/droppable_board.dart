@@ -1,34 +1,69 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:blockin/app/board/domain/model/board.dart';
-import 'package:blockin/app/board/domain/model/piece.dart';
 import 'package:blockin/app/board/ui/components/atoms/board_piece.dart';
+import 'package:blockin/app/board/ui/components/molecules/draggable_board_piece.dart';
 import 'package:flutter/widget_previews.dart';
 
+class PlacedPieceData {
+  final List<List<int>> shape;
+  final Color? color;
+  final String? svgAssetPath;
+  final int rotationDegrees;
+  final int x;
+  final int y;
+
+  const PlacedPieceData({
+    required this.shape,
+    required this.x,
+    required this.y,
+    this.color,
+    this.svgAssetPath,
+    this.rotationDegrees = 0,
+  });
+
+  int get width => shape.isNotEmpty ? shape[0].length : 0;
+  int get height => shape.length;
+}
+
 class DroppableBoard extends StatefulWidget {
-  final Board board;
-  const DroppableBoard({super.key, required this.board});
+  final int cols;
+  final int rows;
+  final List<PlacedPieceData> placedPieces;
+  final bool Function(List<List<int>> shape, int row, int col, int totalRows)
+  canPlacePiece;
+  final PlacedPieceData? Function(
+    List<List<int>> shape,
+    Color? color,
+    String? svgAssetPath,
+    int rotationDegrees,
+    int row,
+    int col,
+    int totalRows,
+  )?
+  onPiecePlaced;
+
+  const DroppableBoard({
+    super.key,
+    required this.cols,
+    required this.rows,
+    this.placedPieces = const [],
+    required this.canPlacePiece,
+    this.onPiecePlaced,
+  });
 
   @override
   State<DroppableBoard> createState() => _DroppableBoardState();
 }
 
 class _DroppableBoardState extends State<DroppableBoard> {
-  late Board _board;
-  Piece? _hoveringPiece;
+  DraggablePieceData? _hoveringPiece;
   int? _hoverRow;
   int? _hoverCol;
 
   @override
-  void initState() {
-    super.initState();
-    _board = widget.board.copyWith();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return DragTarget<Piece>(
+    return DragTarget<DraggablePieceData>(
       onAcceptWithDetails: (details) => _onAcceptWithDetails(context, details),
       onLeave: _onLeave,
       onWillAcceptWithDetails: (_) => true,
@@ -51,7 +86,7 @@ class _DroppableBoardState extends State<DroppableBoard> {
                 CustomPaint(
                   size: Size(constraints.maxWidth, finalHeight),
                   painter: DroppableBoardPainter(
-                    board: _board,
+                    cols: widget.cols,
                     cellSize: cellSize,
                     hoveringPiece: _hoveringPiece,
                     hoverRow: _hoverRow,
@@ -75,9 +110,9 @@ class _DroppableBoardState extends State<DroppableBoard> {
     BuildContext context,
   ) {
     final screenHeight = MediaQuery.of(context).size.height * 0.75;
-    // Fixed 12 columns, cell size based on width
-    final cellSize = width / 12;
-    final boardHeight = _board.rows * cellSize;
+    // Fixed columns, cell size based on width
+    final cellSize = width / widget.cols;
+    final boardHeight = widget.rows * cellSize;
     // Height starts at 0, but minimum is screen height
     final finalHeight = max(boardHeight, screenHeight);
     // Calculate total rows for validation
@@ -90,8 +125,8 @@ class _DroppableBoardState extends State<DroppableBoard> {
     if (_hoveringPiece == null || _hoverRow == null || _hoverCol == null) {
       return true;
     }
-    return _board.canPlacePiece(
-      _hoveringPiece!,
+    return widget.canPlacePiece(
+      _hoveringPiece!.shape,
       _hoverRow!,
       _hoverCol!,
       totalRows,
@@ -99,8 +134,9 @@ class _DroppableBoardState extends State<DroppableBoard> {
   }
 
   // Calculate feedback offset for drag preview
-  Offset _calculateFeedbackOffset(Piece piece, double cellSize) {
-    return Offset(0, -(piece.height * cellSize * 1.5));
+  Offset _calculateFeedbackOffset(DraggablePieceData piece, double cellSize) {
+    final height = piece.shape.length;
+    return Offset(0, -(height * cellSize * 1.5));
   }
 
   // Calculate cell position (row, col) from offset
@@ -127,7 +163,7 @@ class _DroppableBoardState extends State<DroppableBoard> {
 
   void _onAcceptWithDetails(
     BuildContext context,
-    DragTargetDetails<Piece> details,
+    DragTargetDetails<DraggablePieceData> details,
   ) {
     final screenWidth = MediaQuery.of(context).size.width;
     final (cellSize, totalRows, _) = _calculateBoardDimensions(
@@ -146,22 +182,30 @@ class _DroppableBoardState extends State<DroppableBoard> {
       '  - Drop offset: (${dropOffset.dx.toStringAsFixed(2)}, ${dropOffset.dy.toStringAsFixed(2)})',
     );
     print('  - Cell position: Row=$row (from bottom), Col=$col');
-    print('  - Piece: ${details.data}');
 
     // Try to place the piece on the board
-    final newBoard = _board.placePiece(details.data, row, col, totalRows);
+    if (widget.onPiecePlaced != null) {
+      final placedPiece = widget.onPiecePlaced!(
+        details.data.shape,
+        details.data.color,
+        details.data.svgAssetPath,
+        details.data.rotationDegrees,
+        row,
+        col,
+        totalRows,
+      );
 
-    if (newBoard != null) {
-      // Piece was successfully placed
-      setState(() {
-        _board = newBoard;
-      });
-      _clearHoverState();
-      print('[DroppableBoard] Piece successfully placed on board');
+      if (placedPiece != null) {
+        // Piece was successfully placed
+        _clearHoverState();
+        print('[DroppableBoard] Piece successfully placed on board');
+      } else {
+        // Piece could not be placed - clear hover state
+        _clearHoverState();
+        print('[DroppableBoard] Failed to place piece - invalid position');
+      }
     } else {
-      // Piece could not be placed - clear hover state
       _clearHoverState();
-      print('[DroppableBoard] Failed to place piece - invalid position');
     }
   }
 
@@ -170,7 +214,10 @@ class _DroppableBoardState extends State<DroppableBoard> {
     _clearHoverState();
   }
 
-  void _onMove(BuildContext context, DragTargetDetails<Piece> details) {
+  void _onMove(
+    BuildContext context,
+    DragTargetDetails<DraggablePieceData> details,
+  ) {
     final screenWidth = MediaQuery.of(context).size.width;
     final (cellSize, totalRows, _) = _calculateBoardDimensions(
       screenWidth,
@@ -187,9 +234,7 @@ class _DroppableBoardState extends State<DroppableBoard> {
       totalRows,
     );
 
-    print(
-      '[DroppableBoard] onMove: Row=$row (from bottom), Col=$col, Piece=${details.data}',
-    );
+    print('[DroppableBoard] onMove: Row=$row (from bottom), Col=$col');
 
     setState(() {
       _hoveringPiece = details.data;
@@ -199,7 +244,7 @@ class _DroppableBoardState extends State<DroppableBoard> {
   }
 
   List<Widget> _buildPlacedPieces(double cellSize, int totalRows) {
-    return _board.placedPieces.map((piece) {
+    return widget.placedPieces.map((piece) {
       // Calculate position on screen
       // Convert from board coordinates (bottom-up) to screen coordinates (top-down)
       // y is the base of the piece (row), so the top is at y + (height - 1)
@@ -211,22 +256,29 @@ class _DroppableBoardState extends State<DroppableBoard> {
         top: rowFromTop * cellSize,
         width: piece.width * cellSize,
         height: piece.height * cellSize,
-        child: BoardPiece(piece: piece, cellSize: cellSize, isDragging: false),
+        child: BoardPiece(
+          shape: piece.shape,
+          color: piece.color,
+          svgAssetPath: piece.svgAssetPath,
+          rotationDegrees: piece.rotationDegrees,
+          cellSize: cellSize,
+          isDragging: false,
+        ),
       );
     }).toList();
   }
 }
 
 class DroppableBoardPainter extends CustomPainter {
-  final Board board;
+  final int cols;
   final double cellSize;
-  final Piece? hoveringPiece;
+  final DraggablePieceData? hoveringPiece;
   final int? hoverRow;
   final int? hoverCol;
   final bool canPlacePiece;
 
   DroppableBoardPainter({
-    required this.board,
+    required this.cols,
     required this.cellSize,
     this.hoveringPiece,
     this.hoverRow,
@@ -244,7 +296,7 @@ class DroppableBoardPainter extends CustomPainter {
     }
   }
 
-  // Draw grid cells - always 12 columns
+  // Draw grid cells
   void _drawGrid(Canvas canvas, Size size) {
     final borderPaint = Paint()
       ..style = PaintingStyle.stroke
@@ -253,7 +305,7 @@ class DroppableBoardPainter extends CustomPainter {
 
     final rows = (size.height / cellSize).ceil();
     for (int row = 0; row < rows; row++) {
-      for (int col = 0; col < board.cols; col++) {
+      for (int col = 0; col < cols; col++) {
         canvas.drawRect(
           Rect.fromLTWH(col * cellSize, row * cellSize, cellSize, cellSize),
           borderPaint,
@@ -265,7 +317,7 @@ class DroppableBoardPainter extends CustomPainter {
   void _drawHoveringPiece(
     Canvas canvas,
     Size size,
-    Piece piece,
+    DraggablePieceData piece,
     int row,
     int col,
   ) {
@@ -282,21 +334,24 @@ class DroppableBoardPainter extends CustomPainter {
       ..strokeWidth = 2.0
       ..color = pieceColor;
 
+    final pieceHeight = piece.shape.length;
+    final pieceWidth = piece.shape.isNotEmpty ? piece.shape[0].length : 0;
+
     // Draw each cell of the piece shape
     // Note: shape[0] is top (in PiecePainter), but board row 0 is bottom
     // So we need to invert: shape[height-1] goes to row, shape[0] goes to row + (height-1)
-    for (int py = 0; py < piece.height; py++) {
-      for (int px = 0; px < piece.width; px++) {
+    for (int py = 0; py < pieceHeight; py++) {
+      for (int px = 0; px < pieceWidth; px++) {
         // Only draw if this cell is part of the piece (shape[py][px] == 1)
         if (piece.shape[py][px] == 1) {
           // Calculate board position
           // Invert py: shape[0] (top) should be at row + (height-1), shape[height-1] (bottom) should be at row
           final boardCol = col + px;
-          final boardRow = row + (piece.height - 1 - py);
+          final boardRow = row + (pieceHeight - 1 - py);
 
           // Check if position is within board bounds
           if (boardCol >= 0 &&
-              boardCol < board.cols &&
+              boardCol < cols &&
               boardRow >= 0 &&
               boardRow < rows) {
             // Convert row from bottom-up to top-down for drawing
@@ -321,17 +376,17 @@ class DroppableBoardPainter extends CustomPainter {
   // Get piece color with transparency for preview
   // Use red if cannot place, otherwise use piece color
   // For SVG pieces, use a default color for preview
-  Color _getPieceColor(Piece piece) {
-    if (piece.skin.isSvg) {
+  Color _getPieceColor(DraggablePieceData piece) {
+    if (piece.svgAssetPath != null) {
       return canPlacePiece ? Colors.purple.shade400 : Colors.red;
     }
-    return canPlacePiece ? (piece.skin.color ?? Colors.grey) : Colors.red;
+    return canPlacePiece ? (piece.color ?? Colors.grey) : Colors.red;
   }
 
   @override
   bool shouldRepaint(DroppableBoardPainter oldDelegate) {
     return oldDelegate.cellSize != cellSize ||
-        oldDelegate.board != board ||
+        oldDelegate.cols != cols ||
         oldDelegate.hoveringPiece != hoveringPiece ||
         oldDelegate.hoverRow != hoverRow ||
         oldDelegate.hoverCol != hoverCol ||
@@ -341,5 +396,9 @@ class DroppableBoardPainter extends CustomPainter {
 
 @Preview(name: "Board")
 Widget boardPreview() {
-  return DroppableBoard(board: Board());
+  return DroppableBoard(
+    cols: 12,
+    rows: 4,
+    canPlacePiece: (shape, row, col, totalRows) => true,
+  );
 }

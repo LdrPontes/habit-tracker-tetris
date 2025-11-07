@@ -118,7 +118,9 @@ class Board {
       // If there's a cell in this column
       if (lowestPy != null) {
         final boardCol = col + px;
-        final boardRow = row; // The lowest cell is at row (base of the piece)
+        // Calculate the actual board row for this lowest cell
+        // Using the same formula as in placePiece: row + (piece.height - 1 - py)
+        final boardRow = row + (piece.height - 1 - lowestPy);
 
         // Check if this cell has support
         if (boardRow == 0) {
