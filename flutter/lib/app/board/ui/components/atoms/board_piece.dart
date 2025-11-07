@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:starter/app/board/domain/model/piece.dart';
+import 'package:blockin/app/board/domain/model/piece.dart';
 import 'package:flutter/widget_previews.dart';
-import 'package:starter/app/board/domain/model/piece_skin.dart';
-import 'package:starter/constants/skins.dart';
+import 'package:blockin/app/board/domain/model/piece_skin.dart';
+import 'package:blockin/constants/skins.dart';
 
 class BoardPiece extends StatelessWidget {
   final Piece piece;

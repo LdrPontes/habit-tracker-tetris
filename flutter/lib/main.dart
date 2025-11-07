@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:starter/app/auth/ui/screens/reset_password_screen.dart';
-import 'package:starter/app/auth/ui/screens/sign_in_screen.dart';
-import 'package:starter/config/env.dart';
-import 'package:starter/core/app_injections.dart';
-import 'package:starter/core/localization/localizations.dart';
-import 'package:starter/core/navigation/routes.dart';
+import 'package:blockin/app/auth/ui/screens/reset_password_screen.dart';
+import 'package:blockin/app/auth/ui/screens/sign_in_screen.dart';
+import 'package:blockin/config/env.dart';
+import 'package:blockin/core/app_injections.dart';
+import 'package:blockin/core/localization/localizations.dart';
+import 'package:blockin/core/navigation/routes.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:toastification/toastification.dart';
 
@@ -61,10 +61,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    Supabase.instance.client.auth.signOut();
     return ToastificationWrapper(
       child: MaterialApp.router(
         routerConfig: router,
-        title: 'Starter',
+        title: 'blockin',
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         theme: ThemeData(

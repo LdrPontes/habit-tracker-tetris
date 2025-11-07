@@ -1,9 +1,9 @@
 import 'package:go_router/go_router.dart';
-import 'package:starter/app/auth/ui/screens/sign_in_screen.dart';
-import 'package:starter/app/auth/ui/screens/sign_up_screen.dart';
-import 'package:starter/app/auth/ui/screens/forgot_password_screen.dart';
-import 'package:starter/app/auth/ui/screens/reset_password_screen.dart';
-import 'package:starter/core/navigation/redirects.dart';
+import 'package:blockin/app/auth/ui/screens/sign_in_screen.dart';
+import 'package:blockin/app/auth/ui/screens/sign_up_screen.dart';
+import 'package:blockin/app/auth/ui/screens/forgot_password_screen.dart';
+import 'package:blockin/app/auth/ui/screens/reset_password_screen.dart';
+import 'package:blockin/core/navigation/redirects.dart';
 
 final authRoutes = [
   GoRoute(

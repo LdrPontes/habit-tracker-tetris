@@ -1,13 +1,13 @@
-import 'package:starter/app/auth/data/services/apple_sign_in_service.dart';
-import 'package:starter/app/auth/data/services/google_sign_in_service.dart';
-import 'package:starter/app/auth/domain/dto/sign_in_dto.dart';
-import 'package:starter/app/auth/domain/dto/sign_up_dto.dart';
-import 'package:starter/app/auth/domain/errors/auth_exception.dart';
-import 'package:starter/app/auth/domain/repositories/auth_repository.dart';
-import 'package:starter/app/shared/domain/dto/result.dart';
-import 'package:starter/app/shared/domain/model/user.dart';
-import 'package:starter/config/env.dart';
-import 'package:starter/interfaces/logger.dart';
+import 'package:blockin/app/auth/data/services/apple_sign_in_service.dart';
+import 'package:blockin/app/auth/data/services/google_sign_in_service.dart';
+import 'package:blockin/app/auth/domain/dto/sign_in_dto.dart';
+import 'package:blockin/app/auth/domain/dto/sign_up_dto.dart';
+import 'package:blockin/app/auth/domain/errors/auth_exception.dart';
+import 'package:blockin/app/auth/domain/repositories/auth_repository.dart';
+import 'package:blockin/app/shared/domain/dto/result.dart';
+import 'package:blockin/app/shared/domain/model/user.dart';
+import 'package:blockin/config/env.dart';
+import 'package:blockin/interfaces/logger.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide User;
 
 class SupabaseAuthRepository implements AuthRepository {

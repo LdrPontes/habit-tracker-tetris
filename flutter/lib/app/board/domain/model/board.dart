@@ -1,4 +1,4 @@
-import 'package:starter/app/board/domain/model/piece.dart';
+import 'package:blockin/app/board/domain/model/piece.dart';
 
 class Board {
   final int cols;

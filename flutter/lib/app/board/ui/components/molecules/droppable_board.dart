@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:starter/app/board/domain/model/board.dart';
-import 'package:starter/app/board/domain/model/piece.dart';
-import 'package:starter/app/board/ui/components/atoms/board_piece.dart';
+import 'package:blockin/app/board/domain/model/board.dart';
+import 'package:blockin/app/board/domain/model/piece.dart';
+import 'package:blockin/app/board/ui/components/atoms/board_piece.dart';
 import 'package:flutter/widget_previews.dart';
 
 class DroppableBoard extends StatefulWidget {

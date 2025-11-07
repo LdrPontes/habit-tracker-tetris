@@ -1,5 +1,5 @@
-import 'package:starter/app/shared/domain/errors/app_exceptions.dart';
-import 'package:starter/core/localization/localizations.dart';
+import 'package:blockin/app/shared/domain/errors/app_exceptions.dart';
+import 'package:blockin/core/localization/localizations.dart';
 
 enum AuthenticationExceptionCode {
   googleSignInFailed,

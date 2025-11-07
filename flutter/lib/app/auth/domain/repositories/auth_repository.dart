@@ -1,7 +1,7 @@
-import 'package:starter/app/auth/domain/dto/sign_in_dto.dart';
-import 'package:starter/app/auth/domain/dto/sign_up_dto.dart';
-import 'package:starter/app/shared/domain/dto/result.dart';
-import 'package:starter/app/shared/domain/model/user.dart';
+import 'package:blockin/app/auth/domain/dto/sign_in_dto.dart';
+import 'package:blockin/app/auth/domain/dto/sign_up_dto.dart';
+import 'package:blockin/app/shared/domain/dto/result.dart';
+import 'package:blockin/app/shared/domain/model/user.dart';
 
 abstract interface class AuthRepository {
   Future<Result<User>> signInWithGoogle();

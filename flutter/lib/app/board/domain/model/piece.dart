@@ -1,4 +1,4 @@
-import 'package:starter/app/board/domain/model/piece_skin.dart';
+import 'package:blockin/app/board/domain/model/piece_skin.dart';
 
 class Piece {
   final List<List<int>> shape; // Matrix 2D representing the piece shape

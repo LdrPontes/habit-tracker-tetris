@@ -9,7 +9,7 @@ class AppLocalizationsPt extends AppLocalizations {
   AppLocalizationsPt([String locale = 'pt']) : super(locale);
 
   @override
-  String get appName => 'Starter';
+  String get appName => 'blockin';
 
   @override
   String get authErrorGoogleSignInFailed =>

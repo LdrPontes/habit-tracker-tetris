@@ -1,5 +1,5 @@
 {
-  "appName": "Starter",
+  "appName": "blockin",
   "authErrorGoogleSignInFailed": "Google sign in failed. Please try again.",
   "authErrorGoogleIdTokenNotFound": "Sorry, we couldn't sign you in with Google. Please try again.",
   "authErrorAppleSignInFailed": "Apple sign in failed. Please try again.",

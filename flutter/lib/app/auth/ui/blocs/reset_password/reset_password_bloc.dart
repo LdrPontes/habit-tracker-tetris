@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:starter/app/auth/domain/repositories/auth_repository.dart';
-import 'package:starter/app/shared/domain/dto/result.dart';
+import 'package:blockin/app/auth/domain/repositories/auth_repository.dart';
+import 'package:blockin/app/shared/domain/dto/result.dart';
 
 part 'reset_password_event.dart';
 part 'reset_password_state.dart';

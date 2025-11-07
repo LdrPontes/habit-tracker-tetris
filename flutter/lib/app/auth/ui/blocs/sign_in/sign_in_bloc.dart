@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:starter/app/auth/domain/dto/sign_in_dto.dart';
-import 'package:starter/app/auth/domain/repositories/auth_repository.dart';
-import 'package:starter/app/shared/domain/dto/result.dart';
-import 'package:starter/app/shared/domain/model/user.dart';
+import 'package:blockin/app/auth/domain/dto/sign_in_dto.dart';
+import 'package:blockin/app/auth/domain/repositories/auth_repository.dart';
+import 'package:blockin/app/shared/domain/dto/result.dart';
+import 'package:blockin/app/shared/domain/model/user.dart';
 
 part 'sign_in_event.dart';
 part 'sign_in_state.dart';

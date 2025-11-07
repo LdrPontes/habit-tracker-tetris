@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:starter/app/auth/domain/dto/sign_in_dto.dart';
-import 'package:starter/app/auth/ui/blocs/sign_in/sign_in_bloc.dart';
-import 'package:starter/app/auth/ui/screens/sign_up_screen.dart';
-import 'package:starter/app/auth/ui/screens/forgot_password_screen.dart';
-import 'package:starter/app/shared/domain/dto/result.dart';
-import 'package:starter/app/shared/ui/components/molecules/snackbar_service.dart';
-import 'package:starter/core/app_injections.dart';
-import 'package:starter/core/navigation/routes.dart';
-import 'package:starter/app/board/ui/screens/home_screen.dart';
+import 'package:blockin/app/auth/domain/dto/sign_in_dto.dart';
+import 'package:blockin/app/auth/ui/blocs/sign_in/sign_in_bloc.dart';
+import 'package:blockin/app/auth/ui/screens/sign_up_screen.dart';
+import 'package:blockin/app/auth/ui/screens/forgot_password_screen.dart';
+import 'package:blockin/app/shared/domain/dto/result.dart';
+import 'package:blockin/app/shared/ui/components/molecules/snackbar_service.dart';
+import 'package:blockin/core/app_injections.dart';
+import 'package:blockin/core/navigation/routes.dart';
+import 'package:blockin/app/board/ui/screens/home_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   static const String routeName = '/sign-in';

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:starter/app/board/domain/model/board.dart' as board_model;
-import 'package:starter/app/board/domain/model/piece.dart';
-import 'package:starter/app/board/domain/model/piece_skin.dart';
-import 'package:starter/app/board/ui/components/molecules/draggable_board_piece.dart';
-import 'package:starter/app/board/ui/components/molecules/droppable_board.dart';
-import 'package:starter/constants/skins.dart';
+import 'package:blockin/app/board/domain/model/board.dart' as board_model;
+import 'package:blockin/app/board/domain/model/piece.dart';
+import 'package:blockin/app/board/domain/model/piece_skin.dart';
+import 'package:blockin/app/board/ui/components/molecules/draggable_board_piece.dart';
+import 'package:blockin/app/board/ui/components/molecules/droppable_board.dart';
+import 'package:blockin/constants/skins.dart';
 
 class TetrisDemoScreen extends StatefulWidget {
   static const String routeName = '/tetris-demo';

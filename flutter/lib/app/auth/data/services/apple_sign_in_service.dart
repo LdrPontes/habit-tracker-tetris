@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:starter/app/auth/domain/errors/auth_exception.dart';
-import 'package:starter/interfaces/logger.dart';
+import 'package:blockin/app/auth/domain/errors/auth_exception.dart';
+import 'package:blockin/interfaces/logger.dart';
 
 class AppleSignInService {
   Future<

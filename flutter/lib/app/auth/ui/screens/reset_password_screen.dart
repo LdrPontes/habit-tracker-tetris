@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:starter/app/auth/domain/dto/reset_password_dto.dart';
-import 'package:starter/app/auth/ui/blocs/reset_password/reset_password_bloc.dart';
-import 'package:starter/app/auth/ui/screens/sign_in_screen.dart';
-import 'package:starter/app/shared/domain/dto/result.dart';
-import 'package:starter/app/shared/ui/components/molecules/snackbar_service.dart';
-import 'package:starter/core/app_injections.dart';
-import 'package:starter/core/navigation/routes.dart';
+import 'package:blockin/app/auth/domain/dto/reset_password_dto.dart';
+import 'package:blockin/app/auth/ui/blocs/reset_password/reset_password_bloc.dart';
+import 'package:blockin/app/auth/ui/screens/sign_in_screen.dart';
+import 'package:blockin/app/shared/domain/dto/result.dart';
+import 'package:blockin/app/shared/ui/components/molecules/snackbar_service.dart';
+import 'package:blockin/core/app_injections.dart';
+import 'package:blockin/core/navigation/routes.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   static const String routeName = '/reset-password';

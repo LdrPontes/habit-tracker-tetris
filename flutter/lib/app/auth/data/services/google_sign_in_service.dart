@@ -1,6 +1,6 @@
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:starter/app/auth/domain/errors/auth_exception.dart';
-import 'package:starter/interfaces/logger.dart';
+import 'package:blockin/app/auth/domain/errors/auth_exception.dart';
+import 'package:blockin/interfaces/logger.dart';
 
 class GoogleSignInService {
   Future<(String idToken, String accessToken)> signIn() async {
