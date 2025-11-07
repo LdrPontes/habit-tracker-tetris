@@ -203,9 +203,21 @@ class Board {
     return Board(cols: cols, placedPieces: newPlacedPieces, grid: newGrid);
   }
 
+  /// Returns a visual representation of the grid with rows inverted.
+  /// Row 0 (ground) appears at the bottom, matching the board's coordinate system.
+  String toStringGrid() {
+    if (grid.isEmpty) return 'Empty board';
+
+    // Invert rows: grid[0] is top in internal representation, but row 0 is ground (bottom)
+    final invertedGrid = grid.reversed.toList();
+    return invertedGrid.map((row) => row.toString()).join('\n');
+  }
+
   @override
   String toString() {
-    return 'Board(cols: $cols, rows: $rows, placedPieces: ${placedPieces.length})';
+    return 'Board(cols: $cols, rows: $rows, placedPieces: ${placedPieces.length})\n'
+        'Grid (row 0 = ground at bottom):\n'
+        '${toStringGrid()}';
   }
 
   @override

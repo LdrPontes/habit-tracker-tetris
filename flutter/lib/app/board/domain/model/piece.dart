@@ -33,6 +33,16 @@ class Piece {
     );
   }
 
+  /// Returns a visual representation of the shape with rows inverted.
+  /// shape[height-1] (base) appears at the bottom, matching the board's coordinate system.
+  String toStringShape() {
+    if (shape.isEmpty) return 'Empty shape';
+
+    // Invert rows: shape[0] is top in internal representation, but base is at shape[height-1] (bottom)
+    final invertedShape = shape.toList();
+    return invertedShape.map((row) => row.toString()).join('\n');
+  }
+
   @override
   String toString() {
     return 'Piece(shape: $shape, skin: $skin, x: $x, y: $y)';
