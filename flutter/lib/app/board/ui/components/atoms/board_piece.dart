@@ -28,16 +28,28 @@ class BoardPiece extends StatelessWidget {
   }
 
   Widget _buildSvg(String svgAssetPath, Color draggingBorderColor) {
+    final size = Size(cellSize * piece.width, cellSize * piece.height);
+    final width = piece.skin.rotationDegrees % 180 == 90
+        ? size.height
+        : size.width;
+    final height = piece.skin.rotationDegrees % 180 == 90
+        ? size.width
+        : size.height;
+
     return Stack(
       children: [
-        SvgPicture.asset(
-          svgAssetPath,
-          width: cellSize * piece.width,
-          height: cellSize * piece.height,
+        RotatedBox(
+          quarterTurns: piece.skin.rotationDegrees ~/ 90,
+          child: SvgPicture.asset(
+            svgAssetPath,
+            width: width,
+            height: height,
+            fit: BoxFit.fill,
+          ),
         ),
         if (isDragging)
           CustomPaint(
-            size: Size(piece.width * cellSize, piece.height * cellSize),
+            size: size,
             painter: PieceBorderPainter(
               piece: piece,
               cellSize: cellSize,

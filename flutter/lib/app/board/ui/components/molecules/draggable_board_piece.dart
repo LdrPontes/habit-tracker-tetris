@@ -4,7 +4,7 @@ import 'package:blockin/app/board/domain/model/piece_skin.dart';
 import 'package:blockin/app/board/ui/components/atoms/board_piece.dart';
 import 'package:flutter/widget_previews.dart';
 
-class DraggableBoardPiece extends StatelessWidget {
+class DraggableBoardPiece extends StatefulWidget {
   final Piece piece;
   final double cellSize;
 
@@ -15,15 +15,45 @@ class DraggableBoardPiece extends StatelessWidget {
   });
 
   @override
+  State<DraggableBoardPiece> createState() => _DraggableBoardPieceState();
+}
+
+class _DraggableBoardPieceState extends State<DraggableBoardPiece> {
+  late Piece _currentPiece;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentPiece = widget.piece.copyWith();
+  }
+
+  void _handleTap() {
+    setState(() {
+      _currentPiece = _currentPiece.rotate();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Draggable<Piece>(
-      data: piece,
-      feedback: BoardPiece(piece: piece, cellSize: cellSize, isDragging: true),
-      childWhenDragging: BoardPiece(
-        piece: piece.copyWith(skin: PieceSkin.color(Colors.green)),
-        cellSize: cellSize,
+    return GestureDetector(
+      onTap: _handleTap,
+      child: Draggable<Piece>(
+        data: _currentPiece,
+        feedback: BoardPiece(
+          piece: _currentPiece,
+          cellSize: widget.cellSize,
+          isDragging: true,
+        ),
+        childWhenDragging: BoardPiece(
+          piece: _currentPiece.copyWith(skin: PieceSkin.color(Colors.green)),
+          cellSize: widget.cellSize,
+        ),
+        child: BoardPiece(
+          piece: _currentPiece,
+          cellSize: widget.cellSize,
+          isDragging: false,
+        ),
       ),
-      child: BoardPiece(piece: piece, cellSize: cellSize, isDragging: false),
     );
   }
 }

@@ -12,6 +12,7 @@ class Piece {
   int get width => shape[0].length;
 
   /// Rotates the piece (90° clockwise)
+  /// Also rotates the skin if it's an SVG
   Piece rotate() {
     final rotated = List.generate(width, (x) => List<int>.filled(height, 0));
     for (int y = 0; y < height; y++) {
@@ -19,7 +20,8 @@ class Piece {
         rotated[x][height - 1 - y] = shape[y][x];
       }
     }
-    return Piece(shape: rotated, skin: skin, x: x, y: y);
+    final rotatedSkin = skin.rotate();
+    return Piece(shape: rotated, skin: rotatedSkin, x: x, y: y);
   }
 
   Piece copyWith({List<List<int>>? shape, PieceSkin? skin, int? x, int? y}) {

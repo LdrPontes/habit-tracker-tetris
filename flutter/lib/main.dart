@@ -61,7 +61,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    Supabase.instance.client.auth.signOut();
     return ToastificationWrapper(
       child: MaterialApp.router(
         routerConfig: router,

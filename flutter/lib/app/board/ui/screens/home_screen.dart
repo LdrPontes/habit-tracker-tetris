@@ -24,7 +24,7 @@ class _TetrisDemoScreenState extends State<TetrisDemoScreen> {
           child: Column(
             children: [
               DroppableBoard(board: board_model.Board()),
-              const SizedBox(height: 16),
+              const SizedBox(height: 48),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(

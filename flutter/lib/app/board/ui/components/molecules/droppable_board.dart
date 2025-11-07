@@ -41,23 +41,28 @@ class _DroppableBoardState extends State<DroppableBoard> {
           );
           final canPlace = _canPlaceHoveringPiece(totalRows);
 
-          return Stack(
-            children: [
-              // Draw grid only
-              CustomPaint(
-                size: Size(constraints.maxWidth, finalHeight),
-                painter: DroppableBoardPainter(
-                  board: _board,
-                  cellSize: cellSize,
-                  hoveringPiece: _hoveringPiece,
-                  hoverRow: _hoverRow,
-                  hoverCol: _hoverCol,
-                  canPlacePiece: canPlace,
+          return SizedBox(
+            width: constraints.maxWidth,
+            height: finalHeight,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                // Draw grid only
+                CustomPaint(
+                  size: Size(constraints.maxWidth, finalHeight),
+                  painter: DroppableBoardPainter(
+                    board: _board,
+                    cellSize: cellSize,
+                    hoveringPiece: _hoveringPiece,
+                    hoverRow: _hoverRow,
+                    hoverCol: _hoverCol,
+                    canPlacePiece: canPlace,
+                  ),
                 ),
-              ),
-              // Draw all placed pieces using BoardPiece component
-              ..._buildPlacedPieces(cellSize, totalRows),
-            ],
+                // Draw all placed pieces using BoardPiece component
+                ..._buildPlacedPieces(cellSize, totalRows),
+              ],
+            ),
           );
         },
       ),
@@ -69,7 +74,7 @@ class _DroppableBoardState extends State<DroppableBoard> {
     double width,
     BuildContext context,
   ) {
-    final screenHeight = MediaQuery.of(context).size.height * 0.8;
+    final screenHeight = MediaQuery.of(context).size.height * 0.75;
     // Fixed 12 columns, cell size based on width
     final cellSize = width / 12;
     final boardHeight = _board.rows * cellSize;
