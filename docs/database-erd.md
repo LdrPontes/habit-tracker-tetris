@@ -55,10 +55,18 @@ erDiagram
     user_pieces {
         uuid id PK
         uuid user_id FK "User ID (NOT NULL, indexed, CASCADE DELETE)"
-        uuid piece_id FK "Piece ID (nullable, indexed)"
-        uuid task_id FK "Task ID (nullable, indexed, SET NULL on delete)"
         jsonb task_snapshot "Task snapshot (for when task is deleted)"
         timestamp earned_at "When task was completed (NOT NULL)"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    user_onboarding {
+        uuid id PK
+        uuid user_id FK "User ID (NOT NULL, indexed, CASCADE DELETE)"
+        timestamp completed_at "When onboarding was completed (NOT NULL)"
+        jsonb questions_answers "Questions and answers"
+        text version 
         timestamp created_at
         timestamp updated_at
     }
@@ -71,13 +79,15 @@ erDiagram
 
     %% Relationships
     users ||--o{ tasks : "has many (CASCADE DELETE)"
-    users ||--o{ boards : "has many (CASCADE DELETE)"
+    users ||--|| boards : "has one"
     users ||--o{ user_pieces : "has many (CASCADE DELETE)"
     pieces ||--o{ tasks : "used in"
-    pieces ||--o{ user_pieces : "reference (nullable)"
-    tasks ||--o{ user_pieces : "reference (nullable, SET NULL)"
+    pieces ||--o{ user_pieces : "reference (nullable) via task_snapshot"
+    tasks ||--o{ user_pieces : "reference (nullable, SET NULL) via task_snapshot"
     skin_groups ||--o{ skins : "has many"
     boards ||--o{ user_pieces : "references via placed_pieces"
+    pieces ||--|| skins : "has one"
+    users ||--|| user_onboarding : "has one"
 ```
 
 # Types
