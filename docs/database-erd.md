@@ -9,6 +9,7 @@ erDiagram
         timestamp deleted_at "Soft delete (nullable)"
     }
 
+    %% Skin from groups that are assets, not just colors
     skins {
         uuid id PK
         text name "Skin Name"
@@ -24,7 +25,7 @@ erDiagram
         uuid id PK
         text name "Piece Name (ex: I, O, T, S, Z, J, L) (UNIQUE)"
         jsonb shape "2D matrix representing the piece shape"
-        jsonb piece_skin "Piece Skin (color or SVG asset path)"
+        jsonb default_skin "default piece_skin"
         timestamp created_at
         timestamp updated_at
         timestamp deleted_at "Soft delete (nullable)"
@@ -37,7 +38,7 @@ erDiagram
         jsonb piece_skin "Piece Skin (color or SVG asset path)"
         text name "Task Name (NOT NULL)"
         text description "Task Description (nullable)"
-        int order "Task Order (UNIQUE per user)"
+        int order "Task Order (UNIQUE(user_id, order) WHERE deleted_at IS NULL)"
         timestamp created_at
         timestamp updated_at
         timestamp deleted_at "Soft delete (nullable)"
@@ -47,15 +48,16 @@ erDiagram
         uuid id PK
         uuid user_id FK "User ID (NOT NULL, indexed, CASCADE DELETE)"
         jsonb grid "current board grid (2D matrix)"
-        jsonb placed_pieces "array of placed user_piece references"
+        jsonb placed_pieces "array of placed pieces (denormalized data, includes piece, skin, position, task info)"
         timestamp created_at
         timestamp updated_at
     }
 
+    %% Will be deleted when piece is placed on the board
     user_pieces {
         uuid id PK
         uuid user_id FK "User ID (NOT NULL, indexed, CASCADE DELETE)"
-        jsonb task_snapshot "Task snapshot (for when task is deleted)"
+        jsonb task_snapshot "Task snapshot (preserves task data when task is soft-deleted)"
         timestamp earned_at "When task was completed (NOT NULL)"
         timestamp created_at
         timestamp updated_at
@@ -66,7 +68,7 @@ erDiagram
         uuid user_id FK "User ID (NOT NULL, indexed, CASCADE DELETE)"
         timestamp completed_at "When onboarding was completed (NOT NULL)"
         jsonb questions_answers "Questions and answers"
-        text version 
+        text version "Onboarding version (NOT NULL). Format: 1.0.0"
         timestamp created_at
         timestamp updated_at
     }
@@ -86,7 +88,6 @@ erDiagram
     tasks ||--o{ user_pieces : "reference (nullable, SET NULL) via task_snapshot"
     skin_groups ||--o{ skins : "has many"
     boards ||--o{ user_pieces : "references via placed_pieces"
-    pieces ||--|| skins : "has one"
     users ||--|| user_onboarding : "has one"
 ```
 
@@ -94,7 +95,8 @@ erDiagram
 
 ## piece_skin (JSONB)
 ```json
-{
+{  
+  "id": "uuid", // skin.id | null if not in a skin_group (like default_skin)
   "type": "color" | "svg",
   "value": "hex" | "string",
 }
@@ -108,6 +110,7 @@ erDiagram
       "id": "uuid", // piece.id
       "shape": "2D matrix representing the piece shape",
       "skin": { // piece_skin
+        "id": "uuid", // skin.id | null if not in a skin_group (like default_skin)
         "type": "color" | "svg",
         "value": "hex" | "string",
       }
@@ -134,6 +137,7 @@ erDiagram
         "id": "uuid", // piece.id
         "shape": "2D matrix representing the piece shape",
         "skin": { // piece_skin
+            "id": "uuid", // skin.id | null if not in a skin_group (like default_skin)
             "type": "color" | "svg",
             "value": "hex" | "string",
         }
