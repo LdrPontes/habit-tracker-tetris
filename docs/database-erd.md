@@ -21,11 +21,20 @@ erDiagram
         timestamp deleted_at "Soft delete (nullable)"
     }
 
+    user_skins {
+        uuid id PK
+        uuid user_id FK "User ID (NOT NULL, indexed, CASCADE DELETE)"
+        uuid skin_id FK "Skin ID (NOT NULL, indexed)"
+        timestamp created_at
+        timestamp updated_at
+    }
+
     pieces {
         uuid id PK
         text name "Piece Name (ex: I, O, T, S, Z, J, L) (UNIQUE)"
         jsonb shape "2D matrix representing the piece shape"
         jsonb default_skin "default piece_skin"
+        enum piece_size "size of the piece (SMALL, MEDIUM, LARGE)"
         timestamp created_at
         timestamp updated_at
         timestamp deleted_at "Soft delete (nullable)"
@@ -73,6 +82,27 @@ erDiagram
         timestamp updated_at
     }
 
+    user_transactions {
+        uuid id PK
+        uuid user_id FK "User ID (NOT NULL, indexed, SET NULL ON USER DELETE)"
+        text description "Transaction Description (NULLABLE)"
+        int amount "Transaction Amount (NOT NULL). Positive for COIN_PURCHASE, ACHIEVEMENT_EARNED, negative for SKIN_PURCHASE"
+        text transaction_type "Transaction Type (COIN_PURCHASE, SKIN_PURCHASE, ACHIEVEMENT_EARNED)"
+        timestamp created_at "When transaction was created (NOT NULL)"
+        timestamp updated_at "When transaction was updated (NOT NULL)"
+    }
+
+    user_rewards {
+        uuid id PK
+        text description "Reward Description (NULLABLE)"
+        uuid user_id FK "User ID (NOT NULL, indexed, SET NULL ON USER DELETE)"
+        text reward_type "Reward Type (COIN, SKIN) (NOT NULL)"
+        int coin_amount "Coin Amount (NULLABLE). Only for COIN rewards"
+        uuid skin_id FK "Skin ID (NULLABLE, indexed, SET NULL ON SKIN DELETE)"
+        timestamp created_at "When reward was created (NOT NULL)"
+        timestamp updated_at "When reward was updated (NOT NULL)"
+    }
+
     %% Supabase Auth Users
     users {
         uuid id PK "Supabase Auth users.id"
@@ -89,6 +119,11 @@ erDiagram
     skin_groups ||--o{ skins : "has many"
     boards ||--o{ user_pieces : "references via placed_pieces"
     users ||--|| user_onboarding : "has one"
+    users ||--o{ user_transactions : "has many (SET NULL ON USER DELETE)"
+    users ||--o{ user_rewards : "has many (SET NULL ON USER DELETE)"
+    users ||--o{ user_skins : "has many"
+    user_skins ||--o{ skins : "references (CASCADE DELETE)"
+    user_rewards ||--o{ skins : "references (SET NULL ON SKIN DELETE)"
 ```
 
 # Types
