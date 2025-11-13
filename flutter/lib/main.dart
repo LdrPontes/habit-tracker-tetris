@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:blockin/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:blockin/app/auth/ui/screens/reset_password_screen.dart';
 import 'package:blockin/app/auth/ui/screens/sign_in_screen.dart';
@@ -67,9 +68,8 @@ class _MyAppState extends State<MyApp> {
         title: 'blockin',
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        ),
+        theme: BlockinTheme.lightTheme(),
+        darkTheme: BlockinTheme.darkTheme(),
       ),
     );
   }
