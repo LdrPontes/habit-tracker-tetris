@@ -42,8 +42,15 @@ class _SignInTemplateState extends State<SignInTemplate> {
   bool obscureText = true;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  String email = '';
-  String password = '';
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,36 +114,34 @@ class _SignInTemplateState extends State<SignInTemplate> {
           ),
           Spacing.xxLarge.h,
           BlockinInput(
+            controller: emailController,
             hint: AppLocalizations.of(context)!.email,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             validator: (value) => Validators.email(context, value),
-            onSaved: (value) => email = value ?? '',
+            onSaved: (value) => emailController.text = value ?? '',
           ),
           Spacing.small.h,
-          StatefulBuilder(
-            builder: (context, setState) {
-              return BlockinInput(
-                hint: AppLocalizations.of(context)!.password,
-                obscureText: obscureText,
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.done,
-                validator: (value) => Validators.password(context, value),
-                onSaved: (value) => password = value ?? '',
-                endContent: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      obscureText = !obscureText;
-                    });
-                  },
-                  icon: Icon(
-                    obscureText
-                        ? PhosphorIconsBold.eye
-                        : PhosphorIconsBold.eyeSlash,
-                  ),
-                ),
-              );
-            },
+          BlockinInput(
+            controller: passwordController,
+            hint: AppLocalizations.of(context)!.password,
+            obscureText: obscureText,
+            keyboardType: TextInputType.text,
+            textInputAction: TextInputAction.done,
+            validator: (value) => Validators.password(context, value),
+            onSaved: (value) => passwordController.text = value ?? '',
+            endContent: IconButton(
+              onPressed: () {
+                setState(() {
+                  obscureText = !obscureText;
+                });
+              },
+              icon: Icon(
+                obscureText
+                    ? PhosphorIconsBold.eye
+                    : PhosphorIconsBold.eyeSlash,
+              ),
+            ),
           ),
           Spacing.xxLarge.h,
           BlockinRichText(
@@ -161,7 +166,10 @@ class _SignInTemplateState extends State<SignInTemplate> {
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
-                    widget.onSignInPressed(email, password);
+                    widget.onSignInPressed(
+                      emailController.text,
+                      passwordController.text,
+                    );
                   }
                 },
               );

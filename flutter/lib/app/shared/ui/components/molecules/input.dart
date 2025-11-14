@@ -131,7 +131,7 @@ class _BlockinInputState extends State<BlockinInput> {
       validator: widget.validator,
       onSaved: widget.onSaved,
       autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.disabled,
-      initialValue: widget.controller?.text,
+      initialValue: widget.controller == null ? '' : null,
       builder: (field) =>
           _buildInputWithHelper(context, field.errorText, field),
     );
@@ -167,7 +167,7 @@ class _BlockinInputState extends State<BlockinInput> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
-      children: [input, const SizedBox(height: 4), helperWidget],
+      children: [input, helperWidget],
     );
   }
 
@@ -201,7 +201,7 @@ class _BlockinInputState extends State<BlockinInput> {
     );
     final textStyle = _getTextStyle(context);
 
-    return TextFormField(
+    return TextField(
       controller: widget.controller,
       focusNode: focusNode,
       keyboardType: widget.keyboardType,
@@ -217,10 +217,6 @@ class _BlockinInputState extends State<BlockinInput> {
         formFieldState?.didChange(value);
         widget.onChanged?.call(value);
       },
-      onSaved: null,
-      validator: null,
-      autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.disabled,
-      onFieldSubmitted: widget.onSubmitted,
       onEditingComplete: widget.onEditingComplete,
       onTap: widget.onTap,
       onTapOutside: (event) => focusNode.unfocus(),
@@ -316,6 +312,7 @@ class _BlockinInputState extends State<BlockinInput> {
         effectiveError!,
         variant: BlockinTextVariant.caption,
         color: colors.danger,
+        style: TextStyle(height: 1.0),
       );
     }
 
@@ -324,6 +321,7 @@ class _BlockinInputState extends State<BlockinInput> {
         widget.description!,
         variant: BlockinTextVariant.caption,
         color: colors.foreground.shade400,
+        style: TextStyle(height: 1.0),
       );
     }
 
