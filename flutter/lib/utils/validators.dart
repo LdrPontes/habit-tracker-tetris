@@ -34,7 +34,7 @@ class Validators {
     }
 
     final passwordRegex = RegExp(
-      r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$',
+      r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};:"|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};:"|,.<>\/?]{8,}$',
     );
 
     if (!passwordRegex.hasMatch(value)) {
