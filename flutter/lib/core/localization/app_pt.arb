@@ -38,5 +38,7 @@
   "check_your_email_title": "Verifique seu email",
   "check_your_email_description": "Acesse sua caixa de entrada e clique no link\npara verificar seu endereço de email",
   "i_didnt_get_an_email": "Não recebi um email",
-  "resend_email_cooldown": "Reenviar email em {seconds} segundos"
+  "resend_email_cooldown": "Reenviar email em {seconds} segundos",
+  "create_account": "Criar conta",
+  "login": "Login"
 }

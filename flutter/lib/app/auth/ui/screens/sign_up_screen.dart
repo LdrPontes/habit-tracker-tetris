@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:blockin/app/auth/domain/dto/sign_up_dto.dart';
 import 'package:blockin/app/auth/ui/blocs/sign_up/sign_up_bloc.dart';
+import 'package:blockin/app/auth/ui/blocs/sign_in/sign_in_bloc.dart';
 import 'package:blockin/app/auth/ui/components/templates/sign_up_template.dart';
 import 'package:blockin/app/shared/domain/dto/result.dart';
 import 'package:blockin/app/shared/ui/components/molecules/snackbar_service.dart';
 import 'package:blockin/core/app_injections.dart';
 import 'package:blockin/core/navigation/routes.dart';
+import 'package:blockin/app/board/ui/screens/home_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const String routeName = '/sign-up';
@@ -21,6 +23,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final signUpBloc = getIt.get<SignUpBloc>();
+  final signInBloc = getIt.get<SignInBloc>();
 
   final formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
@@ -37,10 +40,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => signUpBloc,
-      child: BlocListener<SignUpBloc, SignUpState>(
-        listener: _signUpListener,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: signUpBloc),
+        BlocProvider.value(value: signInBloc),
+      ],
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<SignUpBloc, SignUpState>(listener: _signUpListener),
+          BlocListener<SignInBloc, SignInState>(listener: _signInListener),
+        ],
         child: SignUpTemplate(
           formKey: formKey,
           nameController: nameController,
@@ -68,16 +77,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
+  void _signInListener(BuildContext context, SignInState state) {
+    if (state.userResult is Success) {
+      router.go(TetrisDemoScreen.routeName);
+    }
+
+    if (state.userResult is Error) {
+      SnackbarService.of(
+        context,
+      ).error((state.userResult as Error).getMessage(context));
+    }
+  }
+
   void _onSignInPressed() {
-    router.go(SignInScreen.routeName);
+    router.pushReplacement(SignInScreen.routeName);
   }
 
   void _onGoogleSignUpPressed() {
-    signUpBloc.add(SignUpWithGoogleEvent());
+    signInBloc.add(SignInWithGoogleEvent());
   }
 
   void _onAppleSignUpPressed() {
-    signUpBloc.add(SignUpWithAppleEvent());
+    signInBloc.add(SignInWithAppleEvent());
   }
 
   void _onSignUpPressed() {

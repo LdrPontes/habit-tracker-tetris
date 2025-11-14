@@ -144,4 +144,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String resend_email_cooldown(Object seconds) {
     return 'Reenviar email em $seconds segundos';
   }
+
+  @override
+  String get create_account => 'Criar conta';
+
+  @override
+  String get login => 'Login';
 }

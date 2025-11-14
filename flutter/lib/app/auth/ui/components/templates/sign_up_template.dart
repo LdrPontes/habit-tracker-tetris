@@ -76,7 +76,7 @@ class _SignUpTemplateState extends State<SignUpTemplate> {
       key: widget.formKey,
       child: Column(
         children: [
-          BlockinText.headingMedium(
+          BlockinText.headingLarge(
             AppLocalizations.of(context)!.sign_up_title,
           ),
           Spacing.xxLarge.h,

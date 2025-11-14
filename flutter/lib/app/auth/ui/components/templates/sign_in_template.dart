@@ -77,9 +77,7 @@ class _SignInTemplateState extends State<SignInTemplate> {
       key: widget.formKey,
       child: Column(
         children: [
-          BlockinText.headingMedium(
-            AppLocalizations.of(context)!.sign_in_title,
-          ),
+          BlockinText.headingLarge(AppLocalizations.of(context)!.sign_in_title),
           Spacing.xxLarge.h,
           BlockinInput(
             controller: widget.emailController,

@@ -70,7 +70,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void _onSignUpPressed() {
-    router.push(SignUpScreen.routeName);
+    router.pushReplacement(SignUpScreen.routeName);
   }
 
   void _onGoogleSignInPressed() {

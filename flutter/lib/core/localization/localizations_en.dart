@@ -144,4 +144,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String resend_email_cooldown(Object seconds) {
     return 'Resend email in $seconds seconds';
   }
+
+  @override
+  String get create_account => 'Create an account';
+
+  @override
+  String get login => 'Login';
 }

@@ -5,6 +5,7 @@ import 'package:blockin/theme/colors/light_colors.dart';
 import 'package:blockin/theme/constants/fonts.dart';
 import 'package:blockin/theme/typography.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// Theme Extension for Flutter's ThemeData
 /// This integrates semantic colors with Flutter's theme system
@@ -206,6 +207,9 @@ class BlockinTheme {
       appBarTheme: base.appBarTheme.copyWith(
         backgroundColor: colors.background,
         foregroundColor: colors.foreground,
+        systemOverlayStyle: brightness == Brightness.light
+            ? SystemUiOverlayStyle.dark
+            : SystemUiOverlayStyle.light,
       ),
 
       cardTheme: base.cardTheme.copyWith(color: colors.content1),
