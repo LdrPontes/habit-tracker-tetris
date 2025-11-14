@@ -48,7 +48,12 @@ class CheckEmailTemplate extends StatelessWidget {
           AppLocalizations.of(context)!.check_your_email_title,
         ),
 
-        Image.asset(ImagesAssets.confirmEmail),
+        Image.asset(
+          Theme.of(context).brightness == Brightness.dark
+              ? ImagesAssets.confirmEmailDark
+              : ImagesAssets.confirmEmail,
+          width: MediaQuery.of(context).size.width,
+        ),
         Spacing.xxLarge.h,
         BlockinText.bodyLarge(
           email,
