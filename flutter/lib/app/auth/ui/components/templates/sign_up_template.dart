@@ -1,4 +1,4 @@
-import 'package:blockin/app/auth/ui/blocs/sign_in/sign_in_bloc.dart';
+import 'package:blockin/app/auth/ui/blocs/sign_up/sign_up_bloc.dart';
 import 'package:blockin/app/auth/ui/components/molecules/auth_divider.dart';
 import 'package:blockin/app/auth/ui/components/molecules/social_buttons.dart';
 import 'package:blockin/app/shared/domain/dto/result.dart';
@@ -8,40 +8,39 @@ import 'package:blockin/app/shared/ui/components/molecules/button.dart';
 import 'package:blockin/app/shared/ui/components/molecules/input.dart';
 import 'package:blockin/core/localization/localizations.dart';
 import 'package:blockin/theme/constants/spacing.dart';
-import 'package:blockin/theme/theme.dart';
 import 'package:blockin/utils/validators.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
-class SignInTemplate extends StatefulWidget {
+class SignUpTemplate extends StatefulWidget {
   final GlobalKey<FormState> formKey;
+  final TextEditingController nameController;
   final TextEditingController emailController;
   final TextEditingController passwordController;
-  final VoidCallback onForgotPasswordPressed;
-  final VoidCallback onSignUpPressed;
-  final VoidCallback onGoogleSignInPressed;
-  final VoidCallback onAppleSignInPressed;
   final VoidCallback onSignInPressed;
+  final VoidCallback onGoogleSignUpPressed;
+  final VoidCallback onAppleSignUpPressed;
+  final VoidCallback onSignUpPressed;
 
-  const SignInTemplate({
+  const SignUpTemplate({
     super.key,
     required this.formKey,
+    required this.nameController,
     required this.emailController,
     required this.passwordController,
-    required this.onForgotPasswordPressed,
-    required this.onSignUpPressed,
-    required this.onGoogleSignInPressed,
-    required this.onAppleSignInPressed,
     required this.onSignInPressed,
+    required this.onGoogleSignUpPressed,
+    required this.onAppleSignUpPressed,
+    required this.onSignUpPressed,
   });
 
   @override
-  State<SignInTemplate> createState() => _SignInTemplateState();
+  State<SignUpTemplate> createState() => _SignUpTemplateState();
 }
 
-class _SignInTemplateState extends State<SignInTemplate> {
+class _SignUpTemplateState extends State<SignUpTemplate> {
   bool obscureText = true;
 
   @override
@@ -60,11 +59,11 @@ class _SignInTemplateState extends State<SignInTemplate> {
               const AuthDivider(),
               Spacing.xxLarge.h,
               SocialButtons(
-                onGooglePressed: widget.onGoogleSignInPressed,
-                onApplePressed: widget.onAppleSignInPressed,
+                onGooglePressed: widget.onGoogleSignUpPressed,
+                onApplePressed: widget.onAppleSignUpPressed,
               ),
               Spacing.xxLarge.h,
-              _signUpCallToAction(context),
+              _signInCallToAction(context),
             ],
           ),
         ),
@@ -78,9 +77,23 @@ class _SignInTemplateState extends State<SignInTemplate> {
       child: Column(
         children: [
           BlockinText.headingMedium(
-            AppLocalizations.of(context)!.sign_in_title,
+            AppLocalizations.of(context)!.sign_up_title,
           ),
           Spacing.xxLarge.h,
+          BlockinInput(
+            controller: widget.nameController,
+            hint: AppLocalizations.of(context)!.name,
+            keyboardType: TextInputType.name,
+            textInputAction: TextInputAction.next,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return AppLocalizations.of(context)!.validation_error_name_required;
+              }
+              return null;
+            },
+            onSaved: (value) => widget.nameController.text = value ?? '',
+          ),
+          Spacing.small.h,
           BlockinInput(
             controller: widget.emailController,
             hint: AppLocalizations.of(context)!.email,
@@ -112,26 +125,14 @@ class _SignInTemplateState extends State<SignInTemplate> {
             ),
           ),
           Spacing.xxLarge.h,
-          BlockinRichText(
-            children: [
-              BlockinTextSpan(
-                text: AppLocalizations.of(context)!.forgot_password,
-                color: Theme.of(context).colors.secondary,
-                variant: BlockinTextVariant.link,
-                recognizer: TapGestureRecognizer()
-                  ..onTap = widget.onForgotPasswordPressed,
-              ),
-            ],
-          ),
-          Spacing.xxLarge.h,
-          BlocBuilder<SignInBloc, SignInState>(
+          BlocBuilder<SignUpBloc, SignUpState>(
             buildWhen: (previous, current) =>
                 previous.userResult != current.userResult,
             builder: (context, state) {
               return BlockinButton(
-                text: AppLocalizations.of(context)!.sign_in,
+                text: AppLocalizations.of(context)!.sign_up_with_email,
                 isLoading: state.userResult is Loading,
-                onPressed: widget.onSignInPressed,
+                onPressed: widget.onSignUpPressed,
               );
             },
           ),
@@ -140,19 +141,20 @@ class _SignInTemplateState extends State<SignInTemplate> {
     );
   }
 
-  Widget _signUpCallToAction(BuildContext context) {
+  Widget _signInCallToAction(BuildContext context) {
     return BlockinRichText(
       children: [
         BlockinTextSpan(
-          text: '${AppLocalizations.of(context)!.sign_up_call_to_action} ',
+          text: '${AppLocalizations.of(context)!.sign_in_call_to_action} ',
           variant: BlockinTextVariant.bodySmall,
         ),
         BlockinTextSpan(
-          text: AppLocalizations.of(context)!.sign_up,
+          text: AppLocalizations.of(context)!.sign_in,
           variant: BlockinTextVariant.link,
-          recognizer: TapGestureRecognizer()..onTap = widget.onSignUpPressed,
+          recognizer: TapGestureRecognizer()..onTap = widget.onSignInPressed,
         ),
       ],
     );
   }
 }
+

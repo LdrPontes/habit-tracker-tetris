@@ -104,65 +104,65 @@ abstract class AppLocalizations {
   /// **'blockin'**
   String get appName;
 
-  /// No description provided for @authErrorGoogleSignInFailed.
+  /// No description provided for @auth_error_google_sign_in_failed.
   ///
   /// In en, this message translates to:
   /// **'Google sign in failed. Please try again.'**
-  String get authErrorGoogleSignInFailed;
+  String get auth_error_google_sign_in_failed;
 
-  /// No description provided for @authErrorGoogleIdTokenNotFound.
+  /// No description provided for @auth_error_google_id_token_not_found.
   ///
   /// In en, this message translates to:
   /// **'Sorry, we couldn\'t sign you in with Google. Please try again.'**
-  String get authErrorGoogleIdTokenNotFound;
+  String get auth_error_google_id_token_not_found;
 
-  /// No description provided for @authErrorAppleSignInFailed.
+  /// No description provided for @auth_error_apple_sign_in_failed.
   ///
   /// In en, this message translates to:
   /// **'Apple sign in failed. Please try again.'**
-  String get authErrorAppleSignInFailed;
+  String get auth_error_apple_sign_in_failed;
 
-  /// No description provided for @authErrorUnknownError.
+  /// No description provided for @auth_error_unknown_error.
   ///
   /// In en, this message translates to:
   /// **'An unknown error occurred. Please try again.'**
-  String get authErrorUnknownError;
+  String get auth_error_unknown_error;
 
-  /// No description provided for @authErrorAppleIdTokenNotFound.
+  /// No description provided for @auth_error_apple_id_token_not_found.
   ///
   /// In en, this message translates to:
   /// **'Sorry, we couldn\'t sign you in with Apple. Please try again.'**
-  String get authErrorAppleIdTokenNotFound;
+  String get auth_error_apple_id_token_not_found;
 
-  /// No description provided for @authErrorUserAlreadyExists.
+  /// No description provided for @auth_error_user_already_exists.
   ///
   /// In en, this message translates to:
   /// **'A user with this email already exists.'**
-  String get authErrorUserAlreadyExists;
+  String get auth_error_user_already_exists;
 
-  /// No description provided for @authErrorUserNotFound.
+  /// No description provided for @auth_error_user_not_found.
   ///
   /// In en, this message translates to:
   /// **'User not found. Please check your credentials.'**
-  String get authErrorUserNotFound;
+  String get auth_error_user_not_found;
 
-  /// No description provided for @authErrorUserInvalidCredentials.
+  /// No description provided for @auth_error_user_invalid_credentials.
   ///
   /// In en, this message translates to:
   /// **'Invalid credentials. Please check your email and password.'**
-  String get authErrorUserInvalidCredentials;
+  String get auth_error_user_invalid_credentials;
 
-  /// No description provided for @authErrorEmailNotConfirmed.
+  /// No description provided for @auth_error_email_not_confirmed.
   ///
   /// In en, this message translates to:
   /// **'Please confirm your email address before signing in.'**
-  String get authErrorEmailNotConfirmed;
+  String get auth_error_email_not_confirmed;
 
-  /// No description provided for @authErrorSamePassword.
+  /// No description provided for @auth_error_same_password.
   ///
   /// In en, this message translates to:
   /// **'New password must be different from your current password.'**
-  String get authErrorSamePassword;
+  String get auth_error_same_password;
 
   /// No description provided for @welcome_description.
   ///
@@ -242,6 +242,36 @@ abstract class AppLocalizations {
   /// **'Sign up'**
   String get sign_up;
 
+  /// No description provided for @sign_up_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get sign_up_title;
+
+  /// No description provided for @sign_up_with_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up with Email'**
+  String get sign_up_with_email;
+
+  /// No description provided for @sign_in_call_to_action.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get sign_in_call_to_action;
+
+  /// No description provided for @name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get name;
+
+  /// No description provided for @validation_error_name_required.
+  ///
+  /// In en, this message translates to:
+  /// **'Name is required'**
+  String get validation_error_name_required;
+
   /// No description provided for @validation_error_email_required.
   ///
   /// In en, this message translates to:
@@ -271,6 +301,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character'**
   String get validation_error_password_invalid;
+
+  /// No description provided for @confirm_your_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your email and confirm your account'**
+  String get confirm_your_email;
 }
 
 class _AppLocalizationsDelegate

@@ -14,15 +14,35 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   SignUpBloc({required AuthRepository authRepository})
     : _authRepository = authRepository,
       super(const SignUpState()) {
-    on<SignUpEvent>(_onSignUpEvent);
+    on<SignUpWithEmailEvent>(_onSignUpWithEmailEvent);
+    on<SignUpWithGoogleEvent>(_onSignUpWithGoogleEvent);
+    on<SignUpWithAppleEvent>(_onSignUpWithAppleEvent);
   }
 
-  Future<void> _onSignUpEvent(
-    SignUpEvent event,
+  Future<void> _onSignUpWithEmailEvent(
+    SignUpWithEmailEvent event,
     Emitter<SignUpState> emit,
   ) async {
     emit(state.copyWith(userResult: const Result.loading()));
     final result = await _authRepository.signUp(event.signUpDto);
+    emit(state.copyWith(userResult: result));
+  }
+
+  Future<void> _onSignUpWithGoogleEvent(
+    SignUpWithGoogleEvent event,
+    Emitter<SignUpState> emit,
+  ) async {
+    emit(state.copyWith(userResult: const Result.loading()));
+    final result = await _authRepository.signInWithGoogle();
+    emit(state.copyWith(userResult: result));
+  }
+
+  Future<void> _onSignUpWithAppleEvent(
+    SignUpWithAppleEvent event,
+    Emitter<SignUpState> emit,
+  ) async {
+    emit(state.copyWith(userResult: const Result.loading()));
+    final result = await _authRepository.signInWithApple();
     emit(state.copyWith(userResult: result));
   }
 }

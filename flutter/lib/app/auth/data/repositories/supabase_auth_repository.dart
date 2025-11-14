@@ -77,8 +77,8 @@ class SupabaseAuthRepository implements AuthRepository {
   Future<Result<User>> signInWithEmail(SignInDto signInDto) async {
     try {
       final response = await Supabase.instance.client.auth.signInWithPassword(
-        email: signInDto.email!,
-        password: signInDto.password!,
+        email: signInDto.email,
+        password: signInDto.password,
       );
 
       return Result.success(

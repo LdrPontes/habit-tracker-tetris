@@ -1,10 +1,21 @@
 part of 'sign_up_bloc.dart';
 
-class SignUpEvent extends Equatable {
+sealed class SignUpEvent extends Equatable {
+  const SignUpEvent();
+
+  @override
+  List<Object> get props => [];
+}
+
+class SignUpWithEmailEvent extends SignUpEvent {
   final SignUpDto signUpDto;
 
-  const SignUpEvent({required this.signUpDto});
+  const SignUpWithEmailEvent({required this.signUpDto});
 
   @override
   List<Object> get props => [signUpDto];
 }
+
+class SignUpWithGoogleEvent extends SignUpEvent {}
+
+class SignUpWithAppleEvent extends SignUpEvent {}

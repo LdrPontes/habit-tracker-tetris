@@ -69,11 +69,11 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void _onForgotPasswordPressed() {
-    router.go(ForgotPasswordScreen.routeName);
+    router.push(ForgotPasswordScreen.routeName);
   }
 
   void _onSignUpPressed() {
-    router.go(SignUpScreen.routeName);
+    router.push(SignUpScreen.routeName);
   }
 
   void _onGoogleSignInPressed() {

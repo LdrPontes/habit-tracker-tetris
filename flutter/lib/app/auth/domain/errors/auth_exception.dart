@@ -57,23 +57,23 @@ class AuthenticationException implements AppException {
     // First check if we have a mapped code
     switch (code) {
       case AuthenticationExceptionCode.googleSignInFailed:
-        return localizations.authErrorGoogleSignInFailed;
+        return localizations.auth_error_google_sign_in_failed;
       case AuthenticationExceptionCode.googleIdTokenNotFound:
-        return localizations.authErrorGoogleIdTokenNotFound;
+        return localizations.auth_error_google_id_token_not_found;
       case AuthenticationExceptionCode.appleSignInFailed:
-        return localizations.authErrorAppleSignInFailed;
+        return localizations.auth_error_apple_sign_in_failed;
       case AuthenticationExceptionCode.appleIdTokenNotFound:
-        return localizations.authErrorAppleIdTokenNotFound;
+        return localizations.auth_error_apple_id_token_not_found;
       case AuthenticationExceptionCode.userAlreadyExists:
-        return localizations.authErrorUserAlreadyExists;
+        return localizations.auth_error_user_already_exists;
       case AuthenticationExceptionCode.userNotFound:
-        return localizations.authErrorUserNotFound;
+        return localizations.auth_error_user_not_found;
       case AuthenticationExceptionCode.invalidCredentials:
-        return localizations.authErrorUserInvalidCredentials;
+        return localizations.auth_error_user_invalid_credentials;
       case AuthenticationExceptionCode.emailNotConfirmed:
-        return localizations.authErrorEmailNotConfirmed;
+        return localizations.auth_error_email_not_confirmed;
       case AuthenticationExceptionCode.samePassword:
-        return localizations.authErrorSamePassword;
+        return localizations.auth_error_same_password;
       case AuthenticationExceptionCode.unknownError:
       case null:
         // If no mapped code, try to map the raw code
@@ -86,7 +86,7 @@ class AuthenticationException implements AppException {
             ).getLocalizedMessage(localizations);
           }
         }
-        return localizations.authErrorUnknownError;
+        return localizations.auth_error_unknown_error;
     }
   }
 }

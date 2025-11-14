@@ -12,43 +12,43 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appName => 'blockin';
 
   @override
-  String get authErrorGoogleSignInFailed =>
+  String get auth_error_google_sign_in_failed =>
       'Google sign in failed. Please try again.';
 
   @override
-  String get authErrorGoogleIdTokenNotFound =>
+  String get auth_error_google_id_token_not_found =>
       'Sorry, we couldn\'t sign you in with Google. Please try again.';
 
   @override
-  String get authErrorAppleSignInFailed =>
+  String get auth_error_apple_sign_in_failed =>
       'Apple sign in failed. Please try again.';
 
   @override
-  String get authErrorUnknownError =>
+  String get auth_error_unknown_error =>
       'An unknown error occurred. Please try again.';
 
   @override
-  String get authErrorAppleIdTokenNotFound =>
+  String get auth_error_apple_id_token_not_found =>
       'Sorry, we couldn\'t sign you in with Apple. Please try again.';
 
   @override
-  String get authErrorUserAlreadyExists =>
+  String get auth_error_user_already_exists =>
       'A user with this email already exists.';
 
   @override
-  String get authErrorUserNotFound =>
+  String get auth_error_user_not_found =>
       'User not found. Please check your credentials.';
 
   @override
-  String get authErrorUserInvalidCredentials =>
+  String get auth_error_user_invalid_credentials =>
       'Invalid credentials. Please check your email and password.';
 
   @override
-  String get authErrorEmailNotConfirmed =>
+  String get auth_error_email_not_confirmed =>
       'Please confirm your email address before signing in.';
 
   @override
-  String get authErrorSamePassword =>
+  String get auth_error_same_password =>
       'New password must be different from your current password.';
 
   @override
@@ -92,6 +92,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sign_up => 'Sign up';
 
   @override
+  String get sign_up_title => 'Create Account';
+
+  @override
+  String get sign_up_with_email => 'Sign up with Email';
+
+  @override
+  String get sign_in_call_to_action => 'Already have an account?';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get validation_error_name_required => 'Name is required';
+
+  @override
   String get validation_error_email_required => 'Email is required';
 
   @override
@@ -107,4 +122,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get validation_error_password_invalid =>
       'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character';
+
+  @override
+  String get confirm_your_email => 'Check your email and confirm your account';
 }
