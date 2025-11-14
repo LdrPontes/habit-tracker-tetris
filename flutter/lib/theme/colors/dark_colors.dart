@@ -14,7 +14,7 @@ class DarkSemanticColors extends IAppColors {
 
   // Layout colors
   @override
-  Color get background => blue.shade900;
+  Color get background => zinc.shade900;
 
   @override
   MaterialColor get foreground =>

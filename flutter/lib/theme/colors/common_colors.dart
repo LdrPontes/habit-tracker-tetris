@@ -133,6 +133,6 @@ mixin CommonColorsMixin implements ICommonColors {
     600: Color(0xFF52525B),
     700: Color(0xFF3F3F46),
     800: Color(0xFF27272A),
-    900: Color(0xFF18181B),
+    900: Color(0xFF0F0F12),
   });
 }
