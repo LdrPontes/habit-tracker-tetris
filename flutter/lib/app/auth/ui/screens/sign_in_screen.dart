@@ -2,7 +2,6 @@ import 'package:blockin/app/auth/ui/screens/forgot_password_screen.dart';
 import 'package:blockin/app/auth/ui/screens/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:blockin/app/auth/domain/dto/sign_in_dto.dart';
 import 'package:blockin/app/auth/ui/blocs/sign_in/sign_in_bloc.dart';
 import 'package:blockin/app/auth/ui/components/templates/sign_in_template.dart';
 import 'package:blockin/app/shared/domain/dto/result.dart';
@@ -24,7 +23,6 @@ class _SignInScreenState extends State<SignInScreen> {
   final signInBloc = getIt.get<SignInBloc>();
 
   final formKey = GlobalKey<FormState>();
-  final signInDto = SignInDto();
 
   @override
   Widget build(BuildContext context) {
@@ -75,11 +73,6 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void _onSignInPressed(String email, String password) {
-    signInBloc.add(
-      SignInWithEmailEvent(
-        email: signInDto.email!,
-        password: signInDto.password!,
-      ),
-    );
+    signInBloc.add(SignInWithEmailEvent(email: email, password: password));
   }
 }

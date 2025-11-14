@@ -312,6 +312,23 @@ class BlockinText extends StatelessWidget {
     this.textHeightBehavior,
   }) : variant = BlockinTextVariant.bodyLarge;
 
+  /// Create a body medium text
+  const BlockinText.bodyMedium(
+    this.text, {
+    super.key,
+    this.color,
+    this.gradient,
+    this.style,
+    this.textAlign,
+    this.softWrap,
+    this.overflow,
+    this.maxLines,
+    this.textScaler,
+    this.semanticsLabel,
+    this.textWidthBasis,
+    this.textHeightBehavior,
+  }) : variant = BlockinTextVariant.bodyMedium;
+
   /// Create a body small text
   const BlockinText.bodySmall(
     this.text, {

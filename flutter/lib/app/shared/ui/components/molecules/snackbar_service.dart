@@ -1,3 +1,5 @@
+import 'package:blockin/app/shared/ui/components/atoms/typography.dart';
+import 'package:blockin/theme/theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -9,7 +11,10 @@ class SnackbarService {
   SnackbarService.of(this.context);
 
   void success(String message, {bool autoClose = true, VoidCallback? onClose}) {
-    final title = Text(message, style: Theme.of(context).textTheme.bodyMedium);
+    final title = BlockinText.bodyMedium(
+      message,
+      color: Theme.of(context).colors.successReadableColor,
+    );
     toastification.show(
       animationDuration: const Duration(milliseconds: 100),
       autoCloseDuration: autoClose ? const Duration(seconds: 3) : null,
@@ -17,7 +22,7 @@ class SnackbarService {
       alignment: Alignment.bottomCenter,
       type: ToastificationType.success,
       style: ToastificationStyle.fillColored,
-      primaryColor: Colors.green.shade500,
+      primaryColor: Theme.of(context).colors.success,
       showProgressBar: false,
       title: kIsWeb
           ? SelectableRegion(
@@ -26,7 +31,10 @@ class SnackbarService {
               child: title,
             )
           : title,
-      icon: Icon(PhosphorIcons.checkCircle(), color: Colors.green.shade500),
+      icon: Icon(
+        PhosphorIconsBold.checkCircle,
+        color: Theme.of(context).colors.successReadableColor,
+      ),
     );
   }
 
@@ -37,10 +45,16 @@ class SnackbarService {
       alignment: Alignment.bottomCenter,
       type: ToastificationType.info,
       style: ToastificationStyle.fillColored,
-      primaryColor: Colors.blue.shade500,
+      primaryColor: Theme.of(context).colors.content1,
       showProgressBar: false,
-      title: Text(message, style: Theme.of(context).textTheme.bodyMedium),
-      icon: Icon(PhosphorIcons.info(), color: Colors.blue.shade500),
+      title: BlockinText.bodyMedium(
+        message,
+        color: Theme.of(context).colors.content1Foreground,
+      ),
+      icon: Icon(
+        PhosphorIconsBold.info,
+        color: Theme.of(context).colors.content1Foreground,
+      ),
     );
   }
 
@@ -51,10 +65,16 @@ class SnackbarService {
       alignment: Alignment.bottomCenter,
       type: ToastificationType.error,
       style: ToastificationStyle.fillColored,
-      primaryColor: Colors.red.shade500,
+      primaryColor: Theme.of(context).colors.danger,
       showProgressBar: false,
-      title: Text(message, style: Theme.of(context).textTheme.bodyMedium),
-      icon: Icon(PhosphorIcons.xCircle(), color: Colors.red.shade500),
+      title: BlockinText.bodyMedium(
+        message,
+        color: Theme.of(context).colors.dangerReadableColor,
+      ),
+      icon: Icon(
+        PhosphorIconsBold.xCircle,
+        color: Theme.of(context).colors.dangerReadableColor,
+      ),
     );
   }
 }

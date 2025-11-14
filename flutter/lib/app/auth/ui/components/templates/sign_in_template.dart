@@ -111,6 +111,7 @@ class _SignInTemplateState extends State<SignInTemplate> {
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             validator: (value) => Validators.email(context, value),
+            onSaved: (value) => email = value ?? '',
           ),
           Spacing.small.h,
           StatefulBuilder(
@@ -121,6 +122,7 @@ class _SignInTemplateState extends State<SignInTemplate> {
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.done,
                 validator: (value) => Validators.password(context, value),
+                onSaved: (value) => password = value ?? '',
                 endContent: IconButton(
                   onPressed: () {
                     setState(() {

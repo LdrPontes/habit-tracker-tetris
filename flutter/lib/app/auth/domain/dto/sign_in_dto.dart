@@ -1,8 +1,8 @@
 class SignInDto {
-  String? email;
-  String? password;
+  final String email;
+  final String password;
 
-  SignInDto({this.email, this.password});
+  const SignInDto({required this.email, required this.password});
 
   @override
   bool operator ==(Object other) {
