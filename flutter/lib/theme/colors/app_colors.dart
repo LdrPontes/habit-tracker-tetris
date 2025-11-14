@@ -78,4 +78,7 @@ abstract class IAppColors with CommonColorsMixin, ReadableColorsMixin {
   @override
   Color get content4Foreground =>
       _isDark ? _dark.content4Foreground : _light.content4Foreground;
+
+  @override
+  Color get inputBorder => _isDark ? _dark.inputBorder : _light.inputBorder;
 }

@@ -135,7 +135,7 @@ class _SpinnerWidget extends StatefulWidget {
 class _SpinnerWidgetState extends State<_SpinnerWidget>
     with TickerProviderStateMixin {
   late AnimationController _controller;
-  late AnimationController _secondaryController;
+  AnimationController? _secondaryController;
 
   @override
   void initState() {
@@ -167,7 +167,7 @@ class _SpinnerWidgetState extends State<_SpinnerWidget>
   @override
   void dispose() {
     _controller.dispose();
-    _secondaryController.dispose();
+    _secondaryController?.dispose();
     super.dispose();
   }
 
@@ -200,7 +200,7 @@ class _SpinnerWidgetState extends State<_SpinnerWidget>
           ),
         ),
         RotationTransition(
-          turns: _secondaryController,
+          turns: _secondaryController!,
           child: CustomPaint(
             size: Size(widget.sizeConfig.size, widget.sizeConfig.size),
             painter: _ArcPainter(

@@ -7,8 +7,6 @@
       "type": "dart",
       "flutterMode": "release",
       "toolArgs": [
-        "--flavor",
-        "prod",
         "--release",
       ]
     },

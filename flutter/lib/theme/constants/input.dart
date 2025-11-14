@@ -1,8 +1,5 @@
 /// Constants for Blockin Input component
 
-/// Input visual variants
-enum BlockinInputVariant { flat, faded, bordered, underlined }
-
 /// Input semantic colors
 enum BlockinInputColor {
   defaultColor,
@@ -89,10 +86,4 @@ class BlockinInputRadius {
     BlockinInputRadiusType.large => 14,
     BlockinInputRadiusType.full => 999,
   };
-}
-
-/// Opacity values for different states, mirrored from button system for consistency
-class BlockinInputOpacity {
-  static const double hover = 0.92;
-  static const double disabled = 0.5;
 }

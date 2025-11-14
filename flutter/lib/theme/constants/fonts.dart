@@ -66,3 +66,9 @@ class FontSize {
   /// Caption - 12px (text-xs, smallest text)
   static const double caption = 12;
 }
+
+class FontFamily {
+  const FontFamily._();
+
+  static const String nunito = 'Nunito';
+}

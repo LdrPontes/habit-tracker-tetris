@@ -51,6 +51,9 @@ enum BlockinTextVariant {
 
   /// Caption text - smallest text
   caption,
+
+  /// Link text
+  link,
 }
 
 /// Blockin Text Component
@@ -394,6 +397,23 @@ class BlockinText extends StatelessWidget {
     this.textHeightBehavior,
   }) : variant = BlockinTextVariant.caption;
 
+  /// Create a link text
+  const BlockinText.link(
+    this.text, {
+    super.key,
+    this.color,
+    this.gradient,
+    this.style,
+    this.textAlign,
+    this.softWrap,
+    this.overflow,
+    this.maxLines,
+    this.textScaler,
+    this.semanticsLabel,
+    this.textWidthBasis,
+    this.textHeightBehavior,
+  }) : variant = BlockinTextVariant.link;
+
   /// Get the text style for the given variant
   TextStyle _getVariantStyle(BuildContext context) {
     final typography = Theme.of(context).blockinTypography;
@@ -430,6 +450,8 @@ class BlockinText extends StatelessWidget {
         return typography.labelSmall;
       case BlockinTextVariant.caption:
         return typography.caption;
+      case BlockinTextVariant.link:
+        return typography.link;
     }
   }
 
@@ -438,7 +460,9 @@ class BlockinText extends StatelessWidget {
     final variantStyle = _getVariantStyle(context);
 
     // Merge styles: variant style -> custom color -> custom style
-    final effectiveStyle = variantStyle.copyWith(color: color).merge(style);
+    final effectiveStyle = variantStyle
+        .copyWith(color: color, decorationColor: color)
+        .merge(style);
 
     final textWidget = Text(
       text,
@@ -603,6 +627,8 @@ class BlockinRichText extends StatelessWidget {
         return typography.labelSmall;
       case BlockinTextVariant.caption:
         return typography.caption;
+      case BlockinTextVariant.link:
+        return typography.link;
     }
   }
 
@@ -610,7 +636,7 @@ class BlockinRichText extends StatelessWidget {
   TextSpan _buildTextSpan(BuildContext context, BlockinTextSpan span) {
     final baseStyle = _getVariantStyle(context, span.variant ?? variant);
     final effectiveStyle = baseStyle
-        .copyWith(color: span.color)
+        .copyWith(color: span.color, decorationColor: span.color)
         .merge(span.style);
 
     return TextSpan(

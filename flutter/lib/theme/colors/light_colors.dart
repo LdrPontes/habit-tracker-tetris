@@ -14,13 +14,13 @@ class LightSemanticColors extends IAppColors {
 
   // Layout colors
   @override
-  Color get background => white;
+  Color get background => zinc.shade100;
 
   @override
   MaterialColor get foreground => ColorUtils.swapMaterialColorDefault(zinc);
 
   @override
-  Color get divider => zinc.shade100;
+  Color get divider => zinc.shade300;
 
   @override
   Color get focus => blue.shade500;
@@ -71,6 +71,9 @@ class LightSemanticColors extends IAppColors {
 
   @override
   MaterialColor get danger => red;
+
+  @override
+  Color get inputBorder => zinc.shade300;
 
   // Readable colors are automatically provided by ReadableColorsMixin
 }

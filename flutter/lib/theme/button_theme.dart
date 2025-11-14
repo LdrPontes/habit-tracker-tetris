@@ -30,9 +30,9 @@ class BlockinButtonThemeExtension
 
   /// Creates a button theme extension
   const BlockinButtonThemeExtension({
-    this.defaultRadius = BlockinRadiusType.medium,
+    this.defaultRadius = BlockinRadiusType.full,
     this.disableAnimations = false,
-    this.defaultSize = BlockinButtonSizeType.medium,
+    this.defaultSize = BlockinButtonSizeType.large,
     this.defaultVariant = BlockinButtonVariant.solid,
     this.defaultColor = BlockinButtonColor.primary,
     this.scaleOnPress = true,

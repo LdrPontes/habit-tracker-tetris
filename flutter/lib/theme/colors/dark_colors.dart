@@ -14,20 +14,20 @@ class DarkSemanticColors extends IAppColors {
 
   // Layout colors
   @override
-  Color get background => const Color(0xFF000000);
+  Color get background => blue.shade900;
 
   @override
   MaterialColor get foreground =>
       ColorUtils.swapMaterialColor(zinc, shade: 800);
 
   @override
-  Color get divider => const Color(0x26FFFFFF); // rgba(255, 255, 255, 0.15)
+  Color get divider => zinc.shade200.withAlpha((255 * 0.15).round());
 
   @override
   Color get focus => blue.shade500;
 
   @override
-  Color get overlay => const Color(0xFF000000);
+  Color get overlay => blue.shade900;
 
   // Content colors
   @override
@@ -74,6 +74,9 @@ class DarkSemanticColors extends IAppColors {
 
   @override
   MaterialColor get danger => ColorUtils.swapMaterialColor(red, shade: 400);
+
+  @override
+  Color get inputBorder => zinc.shade200.withAlpha((255 * 0.15).round());
 
   // Readable colors are automatically provided by ReadableColorsMixin
 }

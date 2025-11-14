@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 /// Spacing constants used throughout the Blockin design system
 ///
 /// These spacing values provide consistent margins, padding, and gaps
@@ -10,8 +12,8 @@
 ///   margin: EdgeInsets.symmetric(horizontal: BlockinSpacing.large),
 /// )
 /// ```
-class BlockinSpacing {
-  const BlockinSpacing._();
+class Spacing {
+  const Spacing._();
 
   /// No spacing (0px)
   static const double none = 0.0;
@@ -45,17 +47,17 @@ class BlockinSpacing {
 }
 
 /// Spacing configuration for different button layouts
-class BlockinButtonSpacing {
-  const BlockinButtonSpacing._();
+class ButtonSpacing {
+  const ButtonSpacing._();
 
   /// Default gap between icon and text
-  static const double iconTextGap = BlockinSpacing.medium;
+  static const double iconTextGap = Spacing.medium;
 
   /// Gap for small buttons
-  static const double smallGap = BlockinSpacing.medium;
+  static const double smallGap = Spacing.medium;
 
   /// Gap for large buttons
-  static const double largeGap = BlockinSpacing.large;
+  static const double largeGap = Spacing.large;
 
   /// Minimum tap target size (accessibility)
   static const double minTapTarget = 44.0;
@@ -65,4 +67,9 @@ class BlockinButtonSpacing {
 
   /// Focus ring spacing
   static const double focusRingSpacing = 2.0;
+}
+
+extension SpacingExtension on num {
+  Widget get w => SizedBox(width: toDouble());
+  Widget get h => SizedBox(height: toDouble());
 }

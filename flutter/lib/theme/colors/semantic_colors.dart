@@ -38,6 +38,8 @@ abstract class SemanticColors {
   Color get successReadableColor;
   Color get warningReadableColor;
   Color get dangerReadableColor;
+
+  Color get inputBorder;
 }
 
 /// Internal mixin that auto-calculates readable colors

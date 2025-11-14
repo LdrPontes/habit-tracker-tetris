@@ -2,6 +2,7 @@ import 'package:blockin/theme/button_theme.dart';
 import 'package:blockin/theme/colors/app_colors.dart';
 import 'package:blockin/theme/colors/dark_colors.dart';
 import 'package:blockin/theme/colors/light_colors.dart';
+import 'package:blockin/theme/constants/fonts.dart';
 import 'package:blockin/theme/typography.dart';
 import 'package:flutter/material.dart';
 
@@ -105,7 +106,7 @@ class BlockinTheme {
   static ThemeData lightTheme({
     ThemeData? baseTheme,
     BlockinTypographyExtension? typography,
-    String? fontFamily,
+    String? fontFamily = FontFamily.nunito,
     BlockinButtonThemeExtension? buttonTheme,
   }) {
     final base = baseTheme ?? ThemeData.light();
@@ -147,7 +148,7 @@ class BlockinTheme {
   static ThemeData darkTheme({
     ThemeData? baseTheme,
     BlockinTypographyExtension? typography,
-    String? fontFamily,
+    String? fontFamily = FontFamily.nunito,
     BlockinButtonThemeExtension? buttonTheme,
   }) {
     return _buildTheme(
@@ -166,13 +167,13 @@ class BlockinTheme {
     required ThemeData base,
     Brightness? brightness,
     BlockinTypographyExtension? typography,
-    String? fontFamily,
+    String? fontFamily = FontFamily.nunito,
     BlockinButtonThemeExtension? buttonTheme,
   }) {
     final effectiveTypography =
         typography ??
         BlockinTypographyExtension.defaultTheme(
-          color: colors.foreground,
+          color: colors.foreground.shade900,
           fontFamily: fontFamily,
         );
 
@@ -196,7 +197,7 @@ class BlockinTheme {
         secondary: colors.secondary,
         error: colors.danger,
         surface: colors.background,
-        onSurface: colors.foreground,
+        onSurface: colors.foreground.shade900,
         onPrimary: colors.primaryReadableColor,
         onSecondary: colors.secondaryReadableColor,
         onError: colors.dangerReadableColor,
@@ -228,7 +229,7 @@ class BlockinTheme {
     required IAppColors colors,
     ThemeData? baseTheme,
     BlockinTypographyExtension? typography,
-    String? fontFamily,
+    String? fontFamily = FontFamily.nunito,
     BlockinButtonThemeExtension? buttonTheme,
   }) {
     final base = baseTheme ?? ThemeData.light();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:blockin/constants/fonts.dart';
+import 'package:blockin/theme/constants/fonts.dart';
 
 /// Blockin Typography Theme Extension
 ///
@@ -54,6 +54,9 @@ class BlockinTypographyExtension
   /// Caption text style - smallest text
   final TextStyle caption;
 
+  /// Link text style
+  final TextStyle link;
+
   const BlockinTypographyExtension({
     required this.displayLarge,
     required this.displayMedium,
@@ -71,6 +74,7 @@ class BlockinTypographyExtension
     required this.labelMedium,
     required this.labelSmall,
     required this.caption,
+    required this.link,
   });
 
   /// Create default typography theme
@@ -106,7 +110,7 @@ class BlockinTypographyExtension
       headingLarge: TextStyle(
         fontFamily: fontFamily,
         fontSize: FontSize.headingLarge,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w700,
         letterSpacing: 0,
         height: 1.25,
         color: color,
@@ -114,7 +118,7 @@ class BlockinTypographyExtension
       headingMedium: TextStyle(
         fontFamily: fontFamily,
         fontSize: FontSize.headingMedium,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w700,
         letterSpacing: 0,
         height: 1.29,
         color: color,
@@ -207,6 +211,17 @@ class BlockinTypographyExtension
         height: 1.4,
         color: color,
       ),
+      link: TextStyle(
+        fontFamily: fontFamily,
+        fontSize: FontSize.bodySmall,
+        fontWeight: FontWeight.w700,
+        letterSpacing: 0.1,
+        height: 1.4,
+        color: color,
+        decoration: TextDecoration.underline,
+        decorationColor: color,
+        decorationThickness: 1.5,
+      ),
     );
   }
 
@@ -228,6 +243,7 @@ class BlockinTypographyExtension
     TextStyle? labelMedium,
     TextStyle? labelSmall,
     TextStyle? caption,
+    TextStyle? link,
   }) {
     return BlockinTypographyExtension(
       displayLarge: displayLarge ?? this.displayLarge,
@@ -246,6 +262,7 @@ class BlockinTypographyExtension
       labelMedium: labelMedium ?? this.labelMedium,
       labelSmall: labelSmall ?? this.labelSmall,
       caption: caption ?? this.caption,
+      link: link ?? this.link,
     );
   }
 
@@ -274,6 +291,7 @@ class BlockinTypographyExtension
       labelMedium: TextStyle.lerp(labelMedium, other.labelMedium, t)!,
       labelSmall: TextStyle.lerp(labelSmall, other.labelSmall, t)!,
       caption: TextStyle.lerp(caption, other.caption, t)!,
+      link: TextStyle.lerp(link, other.link, t)!,
     );
   }
 

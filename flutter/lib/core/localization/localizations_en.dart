@@ -50,4 +50,61 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get authErrorSamePassword =>
       'New password must be different from your current password.';
+
+  @override
+  String get welcome_description =>
+      'Register your journey\nin a visual and\nfun way';
+
+  @override
+  String get start_button => 'Let\'s start';
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get sign_in_title => 'Sign in';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get sign_in => 'Sign in';
+
+  @override
+  String get forgot_password => 'Forgot password?';
+
+  @override
+  String get or => 'or';
+
+  @override
+  String get continue_with_google => 'Continue with Google';
+
+  @override
+  String get continue_with_apple => 'Continue with Apple';
+
+  @override
+  String get sign_up_call_to_action => 'Don\'t have an account?';
+
+  @override
+  String get sign_up => 'Sign up';
+
+  @override
+  String get validation_error_email_required => 'Email is required';
+
+  @override
+  String get validation_error_email_invalid => 'Email is invalid';
+
+  @override
+  String get validation_error_password_required => 'Password is required';
+
+  @override
+  String get validation_error_password_min_length =>
+      'Password must be at least 6 characters long';
+
+  @override
+  String get validation_error_password_invalid =>
+      'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character';
 }

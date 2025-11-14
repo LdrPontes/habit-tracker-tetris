@@ -163,6 +163,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'New password must be different from your current password.'**
   String get authErrorSamePassword;
+
+  /// No description provided for @welcome_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Register your journey\nin a visual and\nfun way'**
+  String get welcome_description;
+
+  /// No description provided for @start_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s start'**
+  String get start_button;
+
+  /// No description provided for @back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
+
+  /// No description provided for @sign_in_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get sign_in_title;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @sign_in.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get sign_in;
+
+  /// No description provided for @forgot_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get forgot_password;
+
+  /// No description provided for @or.
+  ///
+  /// In en, this message translates to:
+  /// **'or'**
+  String get or;
+
+  /// No description provided for @continue_with_google.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get continue_with_google;
+
+  /// No description provided for @continue_with_apple.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Apple'**
+  String get continue_with_apple;
+
+  /// No description provided for @sign_up_call_to_action.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account?'**
+  String get sign_up_call_to_action;
+
+  /// No description provided for @sign_up.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up'**
+  String get sign_up;
+
+  /// No description provided for @validation_error_email_required.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get validation_error_email_required;
+
+  /// No description provided for @validation_error_email_invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is invalid'**
+  String get validation_error_email_invalid;
+
+  /// No description provided for @validation_error_password_required.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get validation_error_password_required;
+
+  /// No description provided for @validation_error_password_min_length.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters long'**
+  String get validation_error_password_min_length;
+
+  /// No description provided for @validation_error_password_invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character'**
+  String get validation_error_password_invalid;
 }
 
 class _AppLocalizationsDelegate
