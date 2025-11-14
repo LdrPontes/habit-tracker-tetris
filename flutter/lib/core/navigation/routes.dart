@@ -13,5 +13,6 @@ GoRouter router = GoRouter(
     if (isAuthenticated) {
       return TetrisDemoScreen.routeName;
     }
+    return null;
   },
 );

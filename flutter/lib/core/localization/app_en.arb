@@ -10,6 +10,7 @@
   "auth_error_user_invalid_credentials": "Invalid credentials. Please check your email and password.",
   "auth_error_email_not_confirmed": "Please confirm your email address before signing in.",
   "auth_error_same_password": "New password must be different from your current password.",
+  "auth_error_email_send_rate_limit": "For security purposes, you can only request this after 1 minute.",
   "welcome_description": "Register your journey\nin a visual and\nfun way",
   "start_button": "Let's start",
   "back": "Back",
@@ -33,5 +34,9 @@
   "validation_error_password_required": "Password is required",
   "validation_error_password_min_length": "Password must be at least 6 characters long",
   "validation_error_password_invalid": "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
-  "confirm_your_email": "Check your email and confirm your account"
+  "confirm_your_email": "Check your email and confirm your account",
+  "check_your_email_title": "Check your email",
+  "check_your_email_description": "Visit your inbox and click the link to\nverify your email address",
+  "i_didnt_get_an_email": "I didn't get an email",
+  "resend_email_cooldown": "Resend email in {seconds} seconds"
 }

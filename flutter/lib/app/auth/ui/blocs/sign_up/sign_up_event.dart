@@ -19,3 +19,16 @@ class SignUpWithEmailEvent extends SignUpEvent {
 class SignUpWithGoogleEvent extends SignUpEvent {}
 
 class SignUpWithAppleEvent extends SignUpEvent {}
+
+class ResendConfirmationEmailEvent extends SignUpEvent {
+  final String email;
+
+  const ResendConfirmationEmailEvent({required this.email});
+
+  @override
+  List<Object> get props => [email];
+}
+
+class ResendEmailTimerTickEvent extends SignUpEvent {
+  const ResendEmailTimerTickEvent();
+}

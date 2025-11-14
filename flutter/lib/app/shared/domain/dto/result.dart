@@ -81,7 +81,7 @@ class PaginatedResult<T> extends Equatable {
 }
 
 extension ErrorHandler on Error {
-  String getMessage(BuildContext context, {String? defaultErrorMessage}) {
+  String getMessage(BuildContext context, {String? defaultErrorMessage = 'An unknown error occurred'}) {
     if (exception is AppException) {
       final localizations = AppLocalizations.of(context);
       if (localizations != null) {

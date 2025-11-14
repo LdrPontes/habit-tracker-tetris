@@ -44,6 +44,12 @@ class Spacing {
 
   /// 5x large spacing (40px)
   static const double xxxxxLarge = 40.0;
+
+  static const double big = 48.0;
+
+  static const double xbig = 56.0;
+
+  static const double xxbig = 64.0;
 }
 
 /// Spacing configuration for different button layouts

@@ -10,6 +10,7 @@
   "auth_error_user_invalid_credentials": "Credenciais inválidas. Verifique seu email e senha.",
   "auth_error_email_not_confirmed": "Por favor, confirme seu endereço de email antes de entrar.",
   "auth_error_same_password": "A nova senha deve ser diferente da sua senha atual.",
+  "auth_error_email_send_rate_limit": "Por motivos de segurança, você só pode solicitar isso após 1 minuto.",
   "welcome_description": "Registre sua jornada\nde uma forma visual\ne divertida",
   "start_button": "Começar",
   "back": "Voltar",
@@ -33,5 +34,9 @@
   "validation_error_password_required": "Senha é obrigatória",
   "validation_error_password_min_length": "Senha deve ter pelo menos 6 caracteres",
   "validation_error_password_invalid": "Senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial",
-  "confirm_your_email": "Verifique seu email e confirme sua conta"
+  "confirm_your_email": "Verifique seu email e confirme sua conta",
+  "check_your_email_title": "Verifique seu email",
+  "check_your_email_description": "Acesse sua caixa de entrada e clique no link\npara verificar seu endereço de email",
+  "i_didnt_get_an_email": "Não recebi um email",
+  "resend_email_cooldown": "Reenviar email em {seconds} segundos"
 }

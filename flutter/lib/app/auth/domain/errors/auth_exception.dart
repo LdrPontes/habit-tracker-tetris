@@ -11,6 +11,7 @@ enum AuthenticationExceptionCode {
   invalidCredentials,
   emailNotConfirmed,
   samePassword,
+  emailSendRateLimit,
   unknownError,
 }
 
@@ -38,6 +39,8 @@ class AuthenticationException implements AppException {
         return AuthenticationExceptionCode.emailNotConfirmed;
       case 'same_password':
         return AuthenticationExceptionCode.samePassword;
+      case 'over_email_send_rate_limit':
+        return AuthenticationExceptionCode.emailSendRateLimit;
       default:
         return null;
     }
@@ -74,6 +77,8 @@ class AuthenticationException implements AppException {
         return localizations.auth_error_email_not_confirmed;
       case AuthenticationExceptionCode.samePassword:
         return localizations.auth_error_same_password;
+      case AuthenticationExceptionCode.emailSendRateLimit:
+        return localizations.auth_error_email_send_rate_limit;
       case AuthenticationExceptionCode.unknownError:
       case null:
         // If no mapped code, try to map the raw code

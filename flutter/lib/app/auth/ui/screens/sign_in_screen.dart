@@ -59,12 +59,9 @@ class _SignInScreenState extends State<SignInScreen> {
     }
 
     if (state.userResult is Error) {
-      SnackbarService.of(context).error(
-        (state.userResult as Error).getMessage(
-          context,
-          defaultErrorMessage: 'An unknown error occurred',
-        ),
-      );
+      SnackbarService.of(
+        context,
+      ).error((state.userResult as Error).getMessage(context));
     }
   }
 

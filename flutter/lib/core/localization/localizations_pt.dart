@@ -52,6 +52,10 @@ class AppLocalizationsPt extends AppLocalizations {
       'A nova senha deve ser diferente da sua senha atual.';
 
   @override
+  String get auth_error_email_send_rate_limit =>
+      'Por motivos de segurança, você só pode solicitar isso após 1 minuto.';
+
+  @override
   String get welcome_description =>
       'Registre sua jornada\nde uma forma visual\ne divertida';
 
@@ -125,4 +129,19 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get confirm_your_email => 'Verifique seu email e confirme sua conta';
+
+  @override
+  String get check_your_email_title => 'Verifique seu email';
+
+  @override
+  String get check_your_email_description =>
+      'Acesse sua caixa de entrada e clique no link\npara verificar seu endereço de email';
+
+  @override
+  String get i_didnt_get_an_email => 'Não recebi um email';
+
+  @override
+  String resend_email_cooldown(Object seconds) {
+    return 'Reenviar email em $seconds segundos';
+  }
 }

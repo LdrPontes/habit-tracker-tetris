@@ -32,24 +32,32 @@ class BlockinAppBar extends StatelessWidget implements PreferredSizeWidget {
     final hasSteps =
         totalSteps != null && currentStep != null && totalSteps! > 0;
     final stepHeight = hasSteps ? 4.0 : 0.0;
+    final isFullscreenDialog =
+        ModalRoute.of(context)?.fullscreenDialog ?? false;
 
     return AppBar(
       title: title != null
           ? BlockinText.headingSmall(title!, textAlign: TextAlign.center)
           : null,
       actions: actions,
-      leading: Navigator.canPop(context)
-          ? IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: Icon(PhosphorIconsBold.caretLeft),
-              color: Theme.of(context).colors.foreground.shade900,
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              padding: EdgeInsets.zero,
-              iconSize: 20,
-            )
-          : leading,
+      leading:
+          leading ??
+          (Navigator.canPop(context)
+              ? IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: Icon(
+                    isFullscreenDialog
+                        ? PhosphorIconsBold.x
+                        : PhosphorIconsBold.caretLeft,
+                  ),
+                  color: Theme.of(context).colors.foreground.shade900,
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  padding: EdgeInsets.zero,
+                  iconSize: 20,
+                )
+              : null),
       backgroundColor: Colors.transparent,
       elevation: 0,
       scrolledUnderElevation: 0,

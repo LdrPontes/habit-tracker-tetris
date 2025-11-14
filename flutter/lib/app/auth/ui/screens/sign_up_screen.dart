@@ -1,5 +1,5 @@
+import 'package:blockin/app/auth/ui/screens/check_email_screen.dart';
 import 'package:blockin/app/auth/ui/screens/sign_in_screen.dart';
-import 'package:blockin/core/localization/localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:blockin/app/auth/domain/dto/sign_up_dto.dart';
@@ -57,18 +57,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void _signUpListener(BuildContext context, SignUpState state) {
     if (state.userResult is Success) {
-      SnackbarService.of(
-        context,
-      ).success(AppLocalizations.of(context)!.confirm_your_email);
-      router.go(SignInScreen.routeName);
+      router.pushReplacement(
+        '${CheckEmailScreen.routeName}?email=${Uri.encodeComponent(emailController.text)}',
+      );
     }
     if (state.userResult is Error) {
-      SnackbarService.of(context).error(
-        (state.userResult as Error).getMessage(
-          context,
-          defaultErrorMessage: 'An unknown error occurred',
-        ),
-      );
+      SnackbarService.of(
+        context,
+      ).error((state.userResult as Error).getMessage(context));
     }
   }
 

@@ -207,6 +207,31 @@ class SupabaseAuthRepository implements AuthRepository {
   }
 
   @override
+  Future<Result<void>> resendConfirmationEmail(String email) async {
+    try {
+      await Supabase.instance.client.auth.resend(
+        type: OtpType.signup,
+        email: email,
+        emailRedirectTo: Env.REDIRECT_URL,
+      );
+
+      return const Result.success();
+    } on AuthException catch (e) {
+      logger.e('[SupabaseAuthRepository] AuthException: ${e.toString()}');
+      return Result.error(
+        exception: AuthenticationException.fromSupabaseError(e.code),
+      );
+    } catch (e) {
+      logger.e('[SupabaseAuthRepository] UnknownException: ${e.toString()}');
+      return Result.error(
+        exception: AuthenticationException(
+          code: AuthenticationExceptionCode.unknownError,
+        ),
+      );
+    }
+  }
+
+  @override
   Future<User?> getCurrentUser() async {
     final user = Supabase.instance.client.auth.currentUser;
     return user != null ? User.fromSupabaseUser(user.toJson()) : null;

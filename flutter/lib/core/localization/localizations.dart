@@ -164,6 +164,12 @@ abstract class AppLocalizations {
   /// **'New password must be different from your current password.'**
   String get auth_error_same_password;
 
+  /// No description provided for @auth_error_email_send_rate_limit.
+  ///
+  /// In en, this message translates to:
+  /// **'For security purposes, you can only request this after 1 minute.'**
+  String get auth_error_email_send_rate_limit;
+
   /// No description provided for @welcome_description.
   ///
   /// In en, this message translates to:
@@ -307,6 +313,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Check your email and confirm your account'**
   String get confirm_your_email;
+
+  /// No description provided for @check_your_email_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your email'**
+  String get check_your_email_title;
+
+  /// No description provided for @check_your_email_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Visit your inbox and click the link to\nverify your email address'**
+  String get check_your_email_description;
+
+  /// No description provided for @i_didnt_get_an_email.
+  ///
+  /// In en, this message translates to:
+  /// **'I didn\'t get an email'**
+  String get i_didnt_get_an_email;
+
+  /// No description provided for @resend_email_cooldown.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend email in {seconds} seconds'**
+  String resend_email_cooldown(Object seconds);
 }
 
 class _AppLocalizationsDelegate
