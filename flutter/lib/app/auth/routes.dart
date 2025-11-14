@@ -5,7 +5,6 @@ import 'package:blockin/app/auth/ui/screens/forgot_password_screen.dart';
 import 'package:blockin/app/auth/ui/screens/reset_password_screen.dart';
 import 'package:blockin/app/auth/ui/screens/welcome_screen.dart';
 import 'package:blockin/app/auth/ui/screens/check_email_screen.dart';
-import 'package:blockin/core/navigation/redirects.dart';
 import 'package:blockin/core/navigation/transitions.dart';
 
 final authRoutes = [
@@ -23,7 +22,6 @@ final authRoutes = [
   ),
   GoRoute(
     path: ResetPasswordScreen.routeName,
-    redirect: requireAuth,
     builder: (context, state) => const ResetPasswordScreen(),
   ),
   GoRoute(

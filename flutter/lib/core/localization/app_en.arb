@@ -40,5 +40,15 @@
   "i_didnt_get_an_email": "I didn't get an email",
   "resend_email_cooldown": "Resend email in {seconds} seconds",
   "create_account": "Create an account",
-  "login": "Login"
+  "login": "Login",
+  "forgot_password_title": "Forgot Password",
+  "send_reset_link": "Send Reset Link",
+  "reset_password_title": "Reset Password",
+  "new_password": "New Password",
+  "confirm_password": "Confirm Password",
+  "reset_password": "Reset Password",
+  "validation_error_password_confirm_required": "Please confirm your password",
+  "validation_error_passwords_do_not_match": "Passwords do not match",
+  "password_reset_link_sent": "Password reset link sent to your email",
+  "password_reset_successfully": "Password reset successfully"
 }

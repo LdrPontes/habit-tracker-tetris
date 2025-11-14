@@ -150,4 +150,37 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get login => 'Login';
+
+  @override
+  String get forgot_password_title => 'Esqueceu a Senha';
+
+  @override
+  String get send_reset_link => 'Enviar Link de Redefinição';
+
+  @override
+  String get reset_password_title => 'Redefinir Senha';
+
+  @override
+  String get new_password => 'Nova Senha';
+
+  @override
+  String get confirm_password => 'Confirmar Senha';
+
+  @override
+  String get reset_password => 'Redefinir Senha';
+
+  @override
+  String get validation_error_password_confirm_required =>
+      'Por favor, confirme sua senha';
+
+  @override
+  String get validation_error_passwords_do_not_match =>
+      'As senhas não coincidem';
+
+  @override
+  String get password_reset_link_sent =>
+      'Link de redefinição de senha enviado para seu email';
+
+  @override
+  String get password_reset_successfully => 'Senha redefinida com sucesso';
 }

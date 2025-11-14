@@ -40,5 +40,15 @@
   "i_didnt_get_an_email": "Não recebi um email",
   "resend_email_cooldown": "Reenviar email em {seconds} segundos",
   "create_account": "Criar conta",
-  "login": "Login"
+  "login": "Login",
+  "forgot_password_title": "Esqueceu a Senha",
+  "send_reset_link": "Enviar Link de Redefinição",
+  "reset_password_title": "Redefinir Senha",
+  "new_password": "Nova Senha",
+  "confirm_password": "Confirmar Senha",
+  "reset_password": "Redefinir Senha",
+  "validation_error_password_confirm_required": "Por favor, confirme sua senha",
+  "validation_error_passwords_do_not_match": "As senhas não coincidem",
+  "password_reset_link_sent": "Link de redefinição de senha enviado para seu email",
+  "password_reset_successfully": "Senha redefinida com sucesso"
 }

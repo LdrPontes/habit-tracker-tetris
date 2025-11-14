@@ -150,4 +150,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get login => 'Login';
+
+  @override
+  String get forgot_password_title => 'Forgot Password';
+
+  @override
+  String get send_reset_link => 'Send Reset Link';
+
+  @override
+  String get reset_password_title => 'Reset Password';
+
+  @override
+  String get new_password => 'New Password';
+
+  @override
+  String get confirm_password => 'Confirm Password';
+
+  @override
+  String get reset_password => 'Reset Password';
+
+  @override
+  String get validation_error_password_confirm_required =>
+      'Please confirm your password';
+
+  @override
+  String get validation_error_passwords_do_not_match =>
+      'Passwords do not match';
+
+  @override
+  String get password_reset_link_sent =>
+      'Password reset link sent to your email';
+
+  @override
+  String get password_reset_successfully => 'Password reset successfully';
 }

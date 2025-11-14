@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:blockin/app/auth/domain/dto/forgot_password_dto.dart';
 import 'package:blockin/app/auth/ui/blocs/forgot_password/forgot_password_bloc.dart';
+import 'package:blockin/app/auth/ui/components/templates/forgot_password_template.dart';
 import 'package:blockin/app/auth/ui/screens/sign_in_screen.dart';
 import 'package:blockin/app/shared/domain/dto/result.dart';
 import 'package:blockin/app/shared/ui/components/molecules/snackbar_service.dart';
 import 'package:blockin/core/app_injections.dart';
+import 'package:blockin/core/localization/localizations.dart';
 import 'package:blockin/core/navigation/routes.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -21,7 +22,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final forgotPasswordBloc = getIt.get<ForgotPasswordBloc>();
 
   final formKey = GlobalKey<FormState>();
-  final forgotPasswordDto = ForgotPasswordDto();
+  final emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,51 +36,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       create: (_) => forgotPasswordBloc,
       child: BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
         listener: _forgotPasswordListener,
-        child: Scaffold(
-          appBar: AppBar(title: const Text('Forgot Password')),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Form(
-                  key: formKey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextFormField(
-                        decoration: const InputDecoration(labelText: 'Email'),
-                        keyboardType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Email is required';
-                          }
-                          return null;
-                        },
-                        onSaved: (value) {
-                          forgotPasswordDto.email = value;
-                        },
-                      ),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: () {
-                          if (formKey.currentState?.validate() ?? false) {
-                            formKey.currentState?.save();
-                            forgotPasswordBloc.add(
-                              ForgotPasswordEvent(
-                                email: forgotPasswordDto.email ?? '',
-                              ),
-                            );
-                          }
-                        },
-                        child: const Text('Send Reset Link'),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+        child: ForgotPasswordTemplate(
+          formKey: formKey,
+          emailController: emailController,
+          onSendResetLinkPressed: _onSendResetLinkPressed,
         ),
       ),
     );
@@ -84,18 +50,24 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     ForgotPasswordState state,
   ) {
     if (state.result is Success) {
-      SnackbarService.of(
-        context,
-      ).success('Password reset link sent to your email');
+      SnackbarService.of(context).success(
+        AppLocalizations.of(context)!.password_reset_link_sent,
+      );
       router.go(SignInScreen.routeName);
     }
 
     if (state.result is Error) {
       SnackbarService.of(context).error(
-        (state.result as Error).getMessage(
-          context,
-          defaultErrorMessage: 'An unknown error occurred',
-        ),
+        (state.result as Error).getMessage(context),
+      );
+    }
+  }
+
+  void _onSendResetLinkPressed() {
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+      forgotPasswordBloc.add(
+        ForgotPasswordEvent(email: emailController.text),
       );
     }
   }

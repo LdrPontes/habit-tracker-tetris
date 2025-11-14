@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:blockin/app/board/ui/screens/home_screen.dart';
 import 'package:blockin/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:blockin/app/auth/ui/screens/reset_password_screen.dart';
@@ -50,6 +51,10 @@ class _MyAppState extends State<MyApp> {
 
       if (event == AuthChangeEvent.signedOut) {
         router.go(SignInScreen.routeName);
+      }
+
+      if (event == AuthChangeEvent.signedIn) {
+        router.go(TetrisDemoScreen.routeName);
       }
     });
   }

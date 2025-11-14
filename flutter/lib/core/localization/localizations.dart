@@ -349,6 +349,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Login'**
   String get login;
+
+  /// No description provided for @forgot_password_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot Password'**
+  String get forgot_password_title;
+
+  /// No description provided for @send_reset_link.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Reset Link'**
+  String get send_reset_link;
+
+  /// No description provided for @reset_password_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get reset_password_title;
+
+  /// No description provided for @new_password.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get new_password;
+
+  /// No description provided for @confirm_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirm_password;
+
+  /// No description provided for @reset_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get reset_password;
+
+  /// No description provided for @validation_error_password_confirm_required.
+  ///
+  /// In en, this message translates to:
+  /// **'Please confirm your password'**
+  String get validation_error_password_confirm_required;
+
+  /// No description provided for @validation_error_passwords_do_not_match.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get validation_error_passwords_do_not_match;
+
+  /// No description provided for @password_reset_link_sent.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset link sent to your email'**
+  String get password_reset_link_sent;
+
+  /// No description provided for @password_reset_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset successfully'**
+  String get password_reset_successfully;
 }
 
 class _AppLocalizationsDelegate
