@@ -23,6 +23,15 @@ class _SignInScreenState extends State<SignInScreen> {
   final signInBloc = getIt.get<SignInBloc>();
 
   final formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +40,9 @@ class _SignInScreenState extends State<SignInScreen> {
       child: BlocListener<SignInBloc, SignInState>(
         listener: _signInListener,
         child: SignInTemplate(
+          formKey: formKey,
+          emailController: emailController,
+          passwordController: passwordController,
           onForgotPasswordPressed: _onForgotPasswordPressed,
           onSignUpPressed: _onSignUpPressed,
           onGoogleSignInPressed: _onGoogleSignInPressed,
@@ -72,7 +84,15 @@ class _SignInScreenState extends State<SignInScreen> {
     signInBloc.add(SignInWithAppleEvent());
   }
 
-  void _onSignInPressed(String email, String password) {
-    signInBloc.add(SignInWithEmailEvent(email: email, password: password));
+  void _onSignInPressed() {
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+      signInBloc.add(
+        SignInWithEmailEvent(
+          email: emailController.text,
+          password: passwordController.text,
+        ),
+      );
+    }
   }
 }

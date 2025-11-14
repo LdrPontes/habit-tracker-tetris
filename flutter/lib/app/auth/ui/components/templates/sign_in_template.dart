@@ -19,14 +19,20 @@ import 'package:flutter_svg/svg.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class SignInTemplate extends StatefulWidget {
+  final GlobalKey<FormState> formKey;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
   final VoidCallback onForgotPasswordPressed;
   final VoidCallback onSignUpPressed;
   final VoidCallback onGoogleSignInPressed;
   final VoidCallback onAppleSignInPressed;
-  final Function(String email, String password) onSignInPressed;
+  final VoidCallback onSignInPressed;
 
   const SignInTemplate({
     super.key,
+    required this.formKey,
+    required this.emailController,
+    required this.passwordController,
     required this.onForgotPasswordPressed,
     required this.onSignUpPressed,
     required this.onGoogleSignInPressed,
@@ -40,17 +46,6 @@ class SignInTemplate extends StatefulWidget {
 
 class _SignInTemplateState extends State<SignInTemplate> {
   bool obscureText = true;
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +101,7 @@ class _SignInTemplateState extends State<SignInTemplate> {
 
   Widget _buildForm(BuildContext context) {
     return Form(
-      key: formKey,
+      key: widget.formKey,
       child: Column(
         children: [
           BlockinText.headingMedium(
@@ -114,22 +109,22 @@ class _SignInTemplateState extends State<SignInTemplate> {
           ),
           Spacing.xxLarge.h,
           BlockinInput(
-            controller: emailController,
+            controller: widget.emailController,
             hint: AppLocalizations.of(context)!.email,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             validator: (value) => Validators.email(context, value),
-            onSaved: (value) => emailController.text = value ?? '',
+            onSaved: (value) => widget.emailController.text = value ?? '',
           ),
           Spacing.small.h,
           BlockinInput(
-            controller: passwordController,
+            controller: widget.passwordController,
             hint: AppLocalizations.of(context)!.password,
             obscureText: obscureText,
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.done,
             validator: (value) => Validators.password(context, value),
-            onSaved: (value) => passwordController.text = value ?? '',
+            onSaved: (value) => widget.passwordController.text = value ?? '',
             endContent: IconButton(
               onPressed: () {
                 setState(() {
@@ -163,15 +158,7 @@ class _SignInTemplateState extends State<SignInTemplate> {
               return BlockinButton(
                 text: AppLocalizations.of(context)!.sign_in,
                 isLoading: state.userResult is Loading,
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    formKey.currentState!.save();
-                    widget.onSignInPressed(
-                      emailController.text,
-                      passwordController.text,
-                    );
-                  }
-                },
+                onPressed: widget.onSignInPressed,
               );
             },
           ),
