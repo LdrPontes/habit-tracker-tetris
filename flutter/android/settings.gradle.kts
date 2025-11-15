@@ -15,6 +15,14 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+    
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "org.gradle.kotlin.kotlin-dsl") {
+                useVersion("5.1.2")
+            }
+        }
+    }
 }
 
 plugins {

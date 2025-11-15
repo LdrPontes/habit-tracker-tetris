@@ -53,7 +53,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       SnackbarService.of(
         context,
       ).success(AppLocalizations.of(context)!.password_reset_successfully);
-      router.go(SignInScreen.routeName);
+      router.pop();
     }
 
     if (state.result is Error) {

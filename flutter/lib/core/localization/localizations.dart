@@ -409,6 +409,210 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password reset successfully'**
   String get password_reset_successfully;
+
+  /// No description provided for @start_onboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s start!'**
+  String get start_onboarding;
+
+  /// No description provided for @start_onboarding_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome aboard! You\'re off to a great start.'**
+  String get start_onboarding_title;
+
+  /// No description provided for @start_onboarding_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Just a few quick questions\nand you\'ll get your first piece!'**
+  String get start_onboarding_description;
+
+  /// No description provided for @onboarding_first_question.
+  ///
+  /// In en, this message translates to:
+  /// **'What is your goal using Blockin?'**
+  String get onboarding_first_question;
+
+  /// No description provided for @onboarding_first_question_option_1.
+  ///
+  /// In en, this message translates to:
+  /// **'Develop new habits'**
+  String get onboarding_first_question_option_1;
+
+  /// No description provided for @onboarding_first_question_option_2.
+  ///
+  /// In en, this message translates to:
+  /// **'Make the process fun'**
+  String get onboarding_first_question_option_2;
+
+  /// No description provided for @onboarding_first_question_option_3.
+  ///
+  /// In en, this message translates to:
+  /// **'Document my journey'**
+  String get onboarding_first_question_option_3;
+
+  /// No description provided for @onboarding_first_question_option_4.
+  ///
+  /// In en, this message translates to:
+  /// **'Increase motivation and consistency'**
+  String get onboarding_first_question_option_4;
+
+  /// No description provided for @onboarding_first_question_option_5.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get onboarding_first_question_option_5;
+
+  /// No description provided for @onboarding_second_question.
+  ///
+  /// In en, this message translates to:
+  /// **'What is your age?'**
+  String get onboarding_second_question;
+
+  /// No description provided for @onboarding_second_question_option_1.
+  ///
+  /// In en, this message translates to:
+  /// **'Under 18'**
+  String get onboarding_second_question_option_1;
+
+  /// No description provided for @onboarding_second_question_option_2.
+  ///
+  /// In en, this message translates to:
+  /// **'19 to 24'**
+  String get onboarding_second_question_option_2;
+
+  /// No description provided for @onboarding_second_question_option_3.
+  ///
+  /// In en, this message translates to:
+  /// **'25 to 34'**
+  String get onboarding_second_question_option_3;
+
+  /// No description provided for @onboarding_second_question_option_4.
+  ///
+  /// In en, this message translates to:
+  /// **'35 to 44'**
+  String get onboarding_second_question_option_4;
+
+  /// No description provided for @onboarding_second_question_option_5.
+  ///
+  /// In en, this message translates to:
+  /// **'45 to 54'**
+  String get onboarding_second_question_option_5;
+
+  /// No description provided for @onboarding_second_question_option_6.
+  ///
+  /// In en, this message translates to:
+  /// **'55 to 64'**
+  String get onboarding_second_question_option_6;
+
+  /// No description provided for @onboarding_second_question_option_7.
+  ///
+  /// In en, this message translates to:
+  /// **'65 or older'**
+  String get onboarding_second_question_option_7;
+
+  /// No description provided for @onboarding_third_question.
+  ///
+  /// In en, this message translates to:
+  /// **'How did you hear about us?'**
+  String get onboarding_third_question;
+
+  /// No description provided for @onboarding_third_question_option_1.
+  ///
+  /// In en, this message translates to:
+  /// **'Instagram'**
+  String get onboarding_third_question_option_1;
+
+  /// No description provided for @onboarding_third_question_option_2.
+  ///
+  /// In en, this message translates to:
+  /// **'TikTok'**
+  String get onboarding_third_question_option_2;
+
+  /// No description provided for @onboarding_third_question_option_3.
+  ///
+  /// In en, this message translates to:
+  /// **'Facebook'**
+  String get onboarding_third_question_option_3;
+
+  /// No description provided for @onboarding_third_question_option_4.
+  ///
+  /// In en, this message translates to:
+  /// **'YouTube'**
+  String get onboarding_third_question_option_4;
+
+  /// No description provided for @onboarding_third_question_option_5.
+  ///
+  /// In en, this message translates to:
+  /// **'Friends and/or family'**
+  String get onboarding_third_question_option_5;
+
+  /// No description provided for @onboarding_third_question_option_6.
+  ///
+  /// In en, this message translates to:
+  /// **'Influencers'**
+  String get onboarding_third_question_option_6;
+
+  /// No description provided for @onboarding_third_question_option_7.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get onboarding_third_question_option_7;
+
+  /// No description provided for @onboarding_fourth_question.
+  ///
+  /// In en, this message translates to:
+  /// **'Have you tried other habit tracker apps?'**
+  String get onboarding_fourth_question;
+
+  /// No description provided for @onboarding_fourth_question_option_1.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get onboarding_fourth_question_option_1;
+
+  /// No description provided for @onboarding_fourth_question_option_2.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get onboarding_fourth_question_option_2;
+
+  /// No description provided for @onboarding_notification_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep consistency, activate our reminders'**
+  String get onboarding_notification_title;
+
+  /// No description provided for @continue_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continue_button;
+
+  /// No description provided for @blockin_daily_habits.
+  ///
+  /// In en, this message translates to:
+  /// **'Blockin: Daily Habits'**
+  String get blockin_daily_habits;
+
+  /// No description provided for @only_two_more_goals.
+  ///
+  /// In en, this message translates to:
+  /// **'Only two more goals for today!'**
+  String get only_two_more_goals;
+
+  /// No description provided for @only_three_more_goals.
+  ///
+  /// In en, this message translates to:
+  /// **'Only three more pieces to reach your next goal!'**
+  String get only_three_more_goals;
+
+  /// No description provided for @onboarding_finished_title.
+  ///
+  /// In en, this message translates to:
+  /// **'All set! Let\'s place your first block to celebrate'**
+  String get onboarding_finished_title;
 }
 
 class _AppLocalizationsDelegate

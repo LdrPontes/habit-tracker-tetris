@@ -1,5 +1,6 @@
 import 'package:blockin/app/auth/ui/screens/forgot_password_screen.dart';
 import 'package:blockin/app/auth/ui/screens/sign_up_screen.dart';
+import 'package:blockin/app/onboarding/ui/screens/start_onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:blockin/app/auth/ui/blocs/sign_in/sign_in_bloc.dart';
@@ -8,7 +9,6 @@ import 'package:blockin/app/shared/domain/dto/result.dart';
 import 'package:blockin/app/shared/ui/components/molecules/snackbar_service.dart';
 import 'package:blockin/core/app_injections.dart';
 import 'package:blockin/core/navigation/routes.dart';
-import 'package:blockin/app/board/ui/screens/home_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   static const String routeName = '/sign-in';
@@ -55,7 +55,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   void _signInListener(BuildContext context, SignInState state) {
     if (state.userResult is Success) {
-      router.go(TetrisDemoScreen.routeName);
+      router.go(StartOnboardingScreen.routeName);
     }
 
     if (state.userResult is Error) {

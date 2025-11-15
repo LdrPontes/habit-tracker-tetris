@@ -183,4 +183,114 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get password_reset_successfully => 'Senha redefinida com sucesso';
+
+  @override
+  String get start_onboarding => 'Vamos começar!';
+
+  @override
+  String get start_onboarding_title => 'Que bom que você chegou! Tá voando.';
+
+  @override
+  String get start_onboarding_description =>
+      'Responda algumas perguntas\npara receber sua primeira peça!';
+
+  @override
+  String get onboarding_first_question =>
+      'Qual o seu objetivo usando o Blockin?';
+
+  @override
+  String get onboarding_first_question_option_1 => 'Desenvolver novos hábitos';
+
+  @override
+  String get onboarding_first_question_option_2 =>
+      'Tornar o processo divertido';
+
+  @override
+  String get onboarding_first_question_option_3 => 'Documentar minha jornada';
+
+  @override
+  String get onboarding_first_question_option_4 =>
+      'Aumentar a motivação e consistência';
+
+  @override
+  String get onboarding_first_question_option_5 => 'Outro';
+
+  @override
+  String get onboarding_second_question => 'Qual é a sua idade?';
+
+  @override
+  String get onboarding_second_question_option_1 => 'Até 18 anos';
+
+  @override
+  String get onboarding_second_question_option_2 => '19 a 24 anos';
+
+  @override
+  String get onboarding_second_question_option_3 => '25 a 34 anos';
+
+  @override
+  String get onboarding_second_question_option_4 => '35 a 44 anos';
+
+  @override
+  String get onboarding_second_question_option_5 => '45 a 54 anos';
+
+  @override
+  String get onboarding_second_question_option_6 => '55 a 64 anos';
+
+  @override
+  String get onboarding_second_question_option_7 => '65 anos ou mais';
+
+  @override
+  String get onboarding_third_question => 'Como você nos conheceu?';
+
+  @override
+  String get onboarding_third_question_option_1 => 'Instagram';
+
+  @override
+  String get onboarding_third_question_option_2 => 'TikTok';
+
+  @override
+  String get onboarding_third_question_option_3 => 'Facebook';
+
+  @override
+  String get onboarding_third_question_option_4 => 'YouTube';
+
+  @override
+  String get onboarding_third_question_option_5 => 'Amigos e/ou familiares';
+
+  @override
+  String get onboarding_third_question_option_6 => 'Influenciadores';
+
+  @override
+  String get onboarding_third_question_option_7 => 'Outros';
+
+  @override
+  String get onboarding_fourth_question =>
+      'Você já testou outros apps de gestão de hábitos?';
+
+  @override
+  String get onboarding_fourth_question_option_1 => 'Sim';
+
+  @override
+  String get onboarding_fourth_question_option_2 => 'Não';
+
+  @override
+  String get onboarding_notification_title =>
+      'Mantenha a consistência, ative nossos lembretes';
+
+  @override
+  String get continue_button => 'Continuar';
+
+  @override
+  String get blockin_daily_habits => 'Blockin: Hábitos Diários';
+
+  @override
+  String get only_two_more_goals => 'Só mais 02 objetivos para hoje!';
+
+  @override
+  String get only_three_more_goals =>
+      'Faltam apenas três peças para você atingir seu próximo objetivo!';
+
+  @override
+  String get onboarding_finished_title =>
+      'Tudo pronto! Vamos colocar seu primeiro bloco para comemorar';
 }

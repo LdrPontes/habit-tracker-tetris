@@ -1,10 +1,9 @@
 import 'dart:async';
 
-import 'package:blockin/app/board/ui/screens/home_screen.dart';
+import 'package:blockin/app/auth/ui/screens/welcome_screen.dart';
 import 'package:blockin/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:blockin/app/auth/ui/screens/reset_password_screen.dart';
-import 'package:blockin/app/auth/ui/screens/sign_in_screen.dart';
 import 'package:blockin/config/env.dart';
 import 'package:blockin/core/app_injections.dart';
 import 'package:blockin/core/localization/localizations.dart';
@@ -50,11 +49,7 @@ class _MyAppState extends State<MyApp> {
       }
 
       if (event == AuthChangeEvent.signedOut) {
-        router.go(SignInScreen.routeName);
-      }
-
-      if (event == AuthChangeEvent.signedIn) {
-        router.go(TetrisDemoScreen.routeName);
+        router.go(WelcomeScreen.routeName);
       }
     });
   }

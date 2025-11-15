@@ -1,4 +1,6 @@
 import 'package:blockin/app/shared/ui/components/atoms/typography.dart';
+import 'package:blockin/core/navigation/routes.dart';
+import 'package:blockin/theme/constants/spacing.dart';
 import 'package:blockin/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -13,6 +15,7 @@ class BlockinAppBar extends StatelessWidget implements PreferredSizeWidget {
   final ShapeBorder? shape;
   final int? totalSteps;
   final int? currentStep;
+  final VoidCallback? onBackPressed;
 
   const BlockinAppBar({
     super.key,
@@ -25,6 +28,7 @@ class BlockinAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.shape,
     this.totalSteps,
     this.currentStep,
+    this.onBackPressed,
   });
 
   @override
@@ -40,11 +44,12 @@ class BlockinAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? BlockinText.headingSmall(title!, textAlign: TextAlign.center)
           : null,
       actions: actions,
+      automaticallyImplyLeading: false,
       leading:
           leading ??
           (Navigator.canPop(context)
               ? IconButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: onBackPressed ?? () => router.pop(),
                   icon: Icon(
                     isFullscreenDialog
                         ? PhosphorIconsBold.x
@@ -79,7 +84,7 @@ class BlockinAppBar extends StatelessWidget implements PreferredSizeWidget {
     final hasSteps =
         totalSteps != null && currentStep != null && totalSteps! > 0;
     final stepHeight = hasSteps ? 4.0 : 0.0;
-    return Size.fromHeight(kToolbarHeight + stepHeight);
+    return Size.fromHeight(Spacing.big + stepHeight);
   }
 }
 

@@ -75,7 +75,6 @@ erDiagram
     user_onboarding {
         uuid id PK
         uuid user_id FK "User ID (NOT NULL, indexed, CASCADE DELETE)"
-        timestamp completed_at "When onboarding was completed (NOT NULL)"
         jsonb questions_answers "Questions and answers"
         text version "Onboarding version (NOT NULL). Format: 1.0.0"
         timestamp created_at

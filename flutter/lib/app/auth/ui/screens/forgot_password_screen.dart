@@ -50,25 +50,23 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     ForgotPasswordState state,
   ) {
     if (state.result is Success) {
-      SnackbarService.of(context).success(
-        AppLocalizations.of(context)!.password_reset_link_sent,
-      );
-      router.go(SignInScreen.routeName);
+      SnackbarService.of(
+        context,
+      ).success(AppLocalizations.of(context)!.password_reset_link_sent);
+      router.pop();
     }
 
     if (state.result is Error) {
-      SnackbarService.of(context).error(
-        (state.result as Error).getMessage(context),
-      );
+      SnackbarService.of(
+        context,
+      ).error((state.result as Error).getMessage(context));
     }
   }
 
   void _onSendResetLinkPressed() {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
-      forgotPasswordBloc.add(
-        ForgotPasswordEvent(email: emailController.text),
-      );
+      forgotPasswordBloc.add(ForgotPasswordEvent(email: emailController.text));
     }
   }
 }
