@@ -35,4 +35,3 @@ class AuthDivider extends StatelessWidget {
     );
   }
 }
-

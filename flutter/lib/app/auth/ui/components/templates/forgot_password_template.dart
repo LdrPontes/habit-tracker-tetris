@@ -60,8 +60,7 @@ class ForgotPasswordTemplate extends StatelessWidget {
           ),
           Spacing.xxLarge.h,
           BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-            buildWhen: (previous, current) =>
-                previous.result != current.result,
+            buildWhen: (previous, current) => previous.result != current.result,
             builder: (context, state) {
               return BlockinButton(
                 text: AppLocalizations.of(context)!.send_reset_link,
@@ -75,4 +74,3 @@ class ForgotPasswordTemplate extends StatelessWidget {
     );
   }
 }
-

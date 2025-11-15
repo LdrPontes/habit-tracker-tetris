@@ -1,5 +1,3 @@
-/// Constants for Blockin Spinner component
-
 /// Spinner size configurations
 enum BlockinSpinnerSizeType { small, medium, large }
 

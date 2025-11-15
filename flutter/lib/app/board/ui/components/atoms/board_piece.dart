@@ -19,10 +19,10 @@ class BoardPiece extends StatelessWidget {
     this.cellSize = 25.0,
     this.isDragging = false,
   }) : assert(
-          (color != null && svgAssetPath == null) ||
-              (color == null && svgAssetPath != null),
-          'Either color or svgAssetPath must be provided, but not both',
-        );
+         (color != null && svgAssetPath == null) ||
+             (color == null && svgAssetPath != null),
+         'Either color or svgAssetPath must be provided, but not both',
+       );
 
   int get width => shape.isNotEmpty ? shape[0].length : 0;
   int get height => shape.length;
@@ -87,7 +87,7 @@ class PiecePainter extends CustomPainter {
   final bool isDragging;
   final Color borderColor;
   final Color color;
-  
+
   PiecePainter({
     required this.shape,
     required this.cellSize,
@@ -260,7 +260,7 @@ class PieceBorderPainter extends CustomPainter {
   }
 }
 
-@Preview(name: "Piece Widget")
+@Preview(name: 'Piece Widget')
 Widget pieceWidgetChristmasPreview() {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,

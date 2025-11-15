@@ -126,7 +126,7 @@ class _DraggableBoardPieceState extends State<DraggableBoardPiece> {
   }
 }
 
-@Preview(name: "Draggable Board Piece")
+@Preview(name: 'Draggable Board Piece')
 Widget draggableBoardPiecePreview() {
   return DraggableBoardPiece(
     initialShape: [

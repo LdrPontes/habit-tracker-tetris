@@ -1,4 +1,4 @@
-/// Constants for Blockin Input component
+//Constants for Blockin Input component
 
 /// Input semantic colors
 enum BlockinInputColor {

@@ -76,9 +76,7 @@ class _SignUpTemplateState extends State<SignUpTemplate> {
       key: widget.formKey,
       child: Column(
         children: [
-          BlockinText.headingLarge(
-            AppLocalizations.of(context)!.sign_up_title,
-          ),
+          BlockinText.headingLarge(AppLocalizations.of(context)!.sign_up_title),
           Spacing.xxLarge.h,
           BlockinInput(
             controller: widget.nameController,
@@ -87,7 +85,9 @@ class _SignUpTemplateState extends State<SignUpTemplate> {
             textInputAction: TextInputAction.next,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return AppLocalizations.of(context)!.validation_error_name_required;
+                return AppLocalizations.of(
+                  context,
+                )!.validation_error_name_required;
               }
               return null;
             },
@@ -157,4 +157,3 @@ class _SignUpTemplateState extends State<SignUpTemplate> {
     );
   }
 }
-

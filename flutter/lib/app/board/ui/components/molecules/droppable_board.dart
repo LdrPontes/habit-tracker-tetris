@@ -394,7 +394,7 @@ class DroppableBoardPainter extends CustomPainter {
   }
 }
 
-@Preview(name: "Board")
+@Preview(name: 'Board')
 Widget boardPreview() {
   return DroppableBoard(
     cols: 12,

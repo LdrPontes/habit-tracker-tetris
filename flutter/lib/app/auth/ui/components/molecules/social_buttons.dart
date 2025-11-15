@@ -60,4 +60,3 @@ class SocialButtons extends StatelessWidget {
     );
   }
 }
-
